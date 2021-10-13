@@ -15,7 +15,7 @@
 .TodoSearch {
   outline: none;
   height: 45px;
-  width: 100%;
+  width: calc(100% - 48px);
   max-width: 1024px;
   border: none;
   color: white;
@@ -50,4 +50,10 @@
 .NotFoundMessage {
   padding: 30px;
   word-break: break-word;
+}
+
+@media (min-width: 1076px) {
+  .TodoSearch {
+    width: 100%;
+  }
 }
