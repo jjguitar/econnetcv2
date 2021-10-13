@@ -1,4 +1,18 @@
 body {
 	margin: 0;
 	font-family: 'Quicksand', sans-serif;
+  overscroll-behavior-y: none;
+  overflow: visible
+}
+
+body::-webkit-scrollbar {
+  border-radius: 15px;
+  background-color: transparent;
+  width: 1px;
+  height: 1px;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  background: transparent
 }

@@ -8,7 +8,6 @@ const Form = () => {
 
   let defaultValues = {}
   if (defaultValue !== '') {
-    setNewTodoValue
     defaultValues = findData(defaultValue)
   }
   const onCancel = () => {

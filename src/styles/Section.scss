@@ -1,11 +1,23 @@
 @import 'vars';
 
+.container-sections{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1024px;
+
+}
+
 .Section {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 0 20px 30px;
-  height: 80px;
+  width: 100%;
+  margin: 0 24px 30px;
+  height: 130px;
   background-color: #202635;
   border-radius: 15px;
   color: white;
@@ -31,6 +43,13 @@ a{
   width: 60%;
   p {
     font-weight: bold;
-    font-size: var(--lg)
+    font-size: 20px;
+  }
+}
+
+@media (max-width:1060px) {
+  .Section {
+    height: 80px;
+    width: calc(100% - 48px);
   }
 }
