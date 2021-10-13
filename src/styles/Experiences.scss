@@ -1,0 +1,54 @@
+@import 'vars';
+
+.Experience {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    width: calc(100% - 48px);
+    max-width: 1024px;
+    text-align: left;
+  }
+}
+
+.TodoSearch {
+  outline: none;
+  height: 45px;
+  width: calc(100% - 48px);
+  max-width: 1024px;
+  margin: 0 auto;
+  border: none;
+  color: white;
+  border-radius: 25px;
+  padding-left: 20px;
+  background: #202635;
+}
+
+.TodoSearch::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+
+// .TodoSearch {
+//   background: var(--white);
+//   padding-left: 12px;
+//   margin: 0 30px;
+//   height: 50px;
+//   width: calc(100% - 60px);
+//   font-size: var(--md);
+//   text-align: left;
+//   font-weight: 400;
+//   color: var(--light-gray);
+//   border: none;
+//   border-radius: 10px;
+// }
+
+.TodoSearch:focus {
+  outline-color: var(--light-gray);
+}
+
+.NotFoundMessage {
+  padding: 30px;
+  word-break: break-word;
+}

@@ -1,0 +1,17 @@
+/* section {
+  width: 100%;
+} */
+.TodoList-container {
+  width: calc(100% - 48px);
+  max-width: 1024px;
+}
+
+ul {
+  margin: 0;
+  padding: 0 0 56px 0;
+  list-style: none;
+}
+
+ul:last-child {
+  margin-bottom: 50px;
+}

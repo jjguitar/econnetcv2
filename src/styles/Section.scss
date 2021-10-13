@@ -1,0 +1,36 @@
+@import 'vars';
+
+.Section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 20px 30px;
+  height: 80px;
+  background-color: #202635;
+  border-radius: 15px;
+  color: white;
+}
+
+a{
+  color: white;
+  text-decoration: none;
+}
+
+.section-divider{
+  height: 100%;
+  width: 40%;
+  border-radius: 15px 100px 50px 15px;
+  background: linear-gradient(90deg, #EF9183 0%, #F5BA93 100%);
+}
+
+.section-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 60%;
+  p {
+    font-weight: bold;
+    font-size: var(--lg)
+  }
+}

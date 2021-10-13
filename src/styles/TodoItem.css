@@ -1,0 +1,62 @@
+.TodoItem {
+  background: linear-gradient(135.96deg, #2F394B 0%, #212A3A 101.74%);
+  color: #F4F6FA;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 34px;
+  width: calc(100% - 20px);
+  border-radius: 20px;
+  padding: 15px 10px;
+  border: 0.2px solid rgba(217, 217, 217, 0.15);
+  filter: drop-shadow(14px 18px 34px rgba(0, 0, 0, 0.32));
+  border-radius: 15px;
+}
+
+.description {
+  width: 80%;
+}
+
+.description-date {
+  padding-left: 15px;
+  font-size: 15px;
+}
+
+.TodoItem-p {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+  width:80%;
+  padding-left: 15px;
+  text-align:left;
+  word-break: break-all;
+}
+.TodoItem-p--complete {
+  text-decoration: line-through;
+}
+
+.Icon {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  width: 48px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+
+.Icon-check--active {
+  color: #4caf50;
+}
+
+.Icon-delete {
+  position: absolute;
+  top: -24px;
+  right: 0;
+}
+.Icon-delete:hover {
+  color: red;
+}

@@ -1,0 +1,25 @@
+@import 'vars';
+
+.main-container {
+  padding-left: 20px;
+  margin: 30px 0;
+  h1, h3 {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.ProductList {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 220px);
+  width: 100%;
+  gap: 20px;
+  grid-auto-flow: column;
+  overflow-x: scroll;
+}
+
+// @media (max-width: 640px) {
+// 	.ProductList {
+// 		grid-template-columns: repeat(auto-fill, 140px);
+// 	}
+// }
