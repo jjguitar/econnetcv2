@@ -1,4 +1,4 @@
-.TodoItem {
+.ExpItem {
   background: linear-gradient(135.96deg, #2F394B 0%, #212A3A 101.74%);
   color: #F4F6FA;
   position: relative;
@@ -22,7 +22,7 @@
   font-size: 15px;
 }
 
-.TodoItem-p {
+.ExpItem-p {
   font-size: 20px;
   line-height: 24px;
   font-weight: 400;
@@ -31,7 +31,7 @@
   text-align:left;
   word-break: break-all;
 }
-.TodoItem-p--complete {
+.ExpItem-p--complete {
   text-decoration: line-through;
 }
 

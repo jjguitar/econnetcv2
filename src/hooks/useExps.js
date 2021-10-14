@@ -2,79 +2,78 @@ import React, { useState } from 'react';
 import { useLocalStorage } from './useLocalStorage.js'
 import { idGenerator } from '../utils/KeyGenerator.js'
 
-const useTodos = () => {
+const useExps = () => {
   const {
-    item: todos,
-    saveItem: saveTodos,
+    item: exps,
+    saveItem: saveExps,
     loading,
     error,
-  } = useLocalStorage('TODOS_V1', []);
+  } = useLocalStorage('EXPS_V1', []);
   const [searchValue, setSearchValue] = React.useState('');
   const [defaultValue, setDefaultValue] = React.useState('');
   const [openModal, setOpenModal] = React.useState(false)
 
-  const completedTodos = todos.filter(todo => !!todo.completed).length
-  const totalTodos = todos.length
+  const completedExps = exps.filter(exp => !!exp.completed).length
+  const totalExps = exps.length
 
-  let searchedTodos = []
+  let searchedExps = []
 
   if(!searchValue.length >= 1) {
-    searchedTodos = todos
+    searchedExps = exps
   } else {
-    searchedTodos = todos.filter(todo => {
-      const todoText = todo.tittle.toLowerCase()
+    searchedExps = exps.filter(exp => {
+      const expText = exp.tittle.toLowerCase()
       const searchedText = searchValue.toLowerCase()
 
-      return todoText.includes(searchedText)
+      return expText.includes(searchedText)
     })
   }
 
   const findIndex = (id) => {
-    return todos.findIndex(todo => todo.id === id)
+    return exps.findIndex(exp => exp.id === id)
   }
 
   const findData = (id) => {
-    const newTodos = [...todos]
-    return newTodos.splice(findIndex(id), 1)
+    const newExps = [...exps]
+    return newExps.splice(findIndex(id), 1)
   }
 
-  const toggleTodo = (id) => {
+  const toggleExp = (id) => {
 
-    const newTodos = [...todos]
-    newTodos[findIndex(id)].completed = !newTodos[findIndex(id)].completed
-    saveTodos(newTodos)
+    const newExps = [...exps]
+    newExps[findIndex(id)].completed = !newExps[findIndex(id)].completed
+    saveExps(newExps)
   }
 
-  const deleteTodo = (id) => {
-    console.log(id)
-    const newTodos = [...todos]
-    newTodos.splice(findIndex(id), 1)
-    saveTodos(newTodos)
+  const deleteExp = (id) => {
+    const newExps = [...exps]
+    newExps.splice(findIndex(id), 1)
+    saveExps(newExps)
   }
 
-  const addTodo = ({tittle, date, description, isVolunteerRequired}) => {
-    const newTodos = [...todos]
-    newTodos.push({
+  const addExp = ({tittle, date, description, isVolunteerRequired}) => {
+    const newExps = [...exps]
+    newExps.push({
       id: idGenerator(),
       tittle,
       date,
       description,
       isVolunteerRequired,
     })
-    saveTodos(newTodos)
+    saveExps(newExps)
   }
 
-  const editTodo = (experience, id) => {
+  const editExp = (experience, id) => {
     console.log(id)
-    const newTodos = [...todos]
-    newTodos[findIndex(id)] = {
+    const newExps = [...exps]
+    newExps[findIndex(id)] = {
       id: idGenerator(),
       tittle: experience.tittle,
       date: experience.date,
       description: experience.description,
       isVolunteerRequired: experience.isVolunteerRequired,
     }
-    saveTodos(newTodos)
+    saveExps(newExps)
   }
 
   const initialState = {
@@ -101,14 +100,14 @@ const useTodos = () => {
     {
       loading,
       error,
-      completedTodos,
+      completedExps,
       searchValue,
-      totalTodos,
-      searchedTodos,
+      totalExps,
+      searchedExps,
       setSearchValue,
-      toggleTodo,
-      addTodo,
-      deleteTodo,
+      toggleExp,
+      addExp,
+      deleteExp,
       openModal,
       setOpenModal,
       state,
@@ -117,10 +116,10 @@ const useTodos = () => {
       defaultValue,
       setDefaultValue,
       findData,
-      editTodo
+      editExp
     }
   )
 }
 
-export { useTodos }
+export { useExps }
 

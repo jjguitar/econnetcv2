@@ -1,6 +1,6 @@
 @import 'vars';
 
-.ProductItem {
+.ExperienceItem {
 	width: 220px;
   padding-top: 10px;
   display: flex;
@@ -12,23 +12,23 @@
   position: relative;
 }
 
-.ProductItem:last-child {
+.ExperienceItem:last-child {
   margin-right: 20px;
 }
 
-.ProductItem img {
+.ExperienceItem img {
 	width: 200px;
 	height: 100px;
 	border-radius: 20px;
 	object-fit: cover;
 }
 
-.Product-img__container {
+.Experience-img__container {
   position: relative;
   width: 200px;
 	height: 100px;
 }
-.Product-img__container:before {
+.Experience-img__container:before {
 	content:'';
 	position: absolute;
   top: 0;
@@ -39,26 +39,26 @@
   border-radius: 20px;
 }
 
-.product-info {
+.experience-info {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-top: 5px;
 }
-.product-info figure {
+.experience-info figure {
 	margin: 0;
 }
-.product-info figure img {
+.experience-info figure img {
 	width: 25px;
 	height: 25px;
 }
-.product-info div p:nth-child(1) {
+.experience-info div p:nth-child(1) {
 	font-weight: bold;
 	font-size: var(--md);
 	margin-top: 0;
 	margin-bottom: 4px;
 }
-.product-info div p:nth-child(2) {
+.experience-info div p:nth-child(2) {
 	font-size: var(--sm);
 	margin-top: 0;
 	margin-bottom: 0;
@@ -68,18 +68,28 @@
 // 	.cards-container {
 // 		grid-template-columns: repeat(auto-fill, 140px);
 // 	}
-// 	.ProductItem {
+// 	.ExperienceItem {
 // 		width: 140px;
 // 	}
-// 	.ProductItem img {
+// 	.ExperienceItem img {
 // 		width: 140px;
 // 		height: 140px;
 // 	}
 // }
 
-.product-details {
+.experience-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-top:10px;
+  height:65%;
   width: 80%;
   position: absolute;
   top: 0;
   color: white;
+}
+
+.experience-details__title{
+  font-size: 20px;
 }

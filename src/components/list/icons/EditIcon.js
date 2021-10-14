@@ -1,10 +1,10 @@
 import React from 'react';
-import { TodoIcon } from './TodoIcon.js'
+import { ExpIcon } from './ExpIcon.js'
 import '../../../styles/pp.scss'
 
 const EditIcon = ({ onEdit }) => {
   return (
-    <TodoIcon
+    <ExpIcon
       type='edit'
       onClick={onEdit}
     />

@@ -16,7 +16,7 @@
 
 form {
   width: 90%;
-  max-width: 300px;
+  max-width: 400px;
   background-color: var(--light-gray);
   color: var(--primary-color);
   padding: 33px 40px;
@@ -144,7 +144,7 @@ input[type="date"] {
 
 
 
-.TodoForm-buttonContainer {
+.ExpForm-buttonContainer {
   margin-top: 14px;
   display: flex;
   justify-content: space-between;
@@ -152,7 +152,7 @@ input[type="date"] {
   width: 100%;
 }
 
-.TodoForm-button {
+.ExpForm-button {
   cursor: pointer;
   display: inline-block;
   font-size: 20px;
@@ -164,13 +164,13 @@ input[type="date"] {
   border: none;
 }
 
-.TodoForm-button-add {
+.ExpForm-button-add {
   color: #F4F6FA;
   border-radius:10px;
   background-color: var(--primary-color);
 }
 
-.TodoForm-button-cancel {
+.ExpForm-button-cancel {
   border-radius:10px;
   color: var(--primary-color);
   background: #F4F6FA;
@@ -186,14 +186,19 @@ input[type="date"] {
 }
 
 @media (max-width: 290px) {
-  .TodoForm-buttonContainer {
+  .ExpForm-buttonContainer {
     flex-direction: column-reverse;
   }
 
-  .TodoForm-button-add {
+  .ExpForm-button-add {
     margin-bottom: 10px;
   }
-  .TodoForm-button-add, .TodoForm-button-cancel {
+  .ExpForm-button-add, .ExpForm-button-cancel {
     width: 100%;
+  }
+}
+@media (max-width: 350px) {
+  .content-select i{
+    display: none;
   }
 }

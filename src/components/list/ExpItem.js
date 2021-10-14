@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import '../../styles/TodoItem.css'
+import '../../styles/ExpItem.css'
 import { CompleteIcon } from './icons/CompleteIcon.js'
 import { DeleteIcon } from './icons/DeleteIcon.js'
 import { EditIcon } from './icons/EditIcon.js'
 import AppContext from '../../context/AppContext'
 
-const TodoItem = (props) => {
+const ExpItem = (props) => {
 
   const { setDefaultValue } = useContext(AppContext)
 
@@ -14,14 +14,14 @@ const TodoItem = (props) => {
     props.setOpenModal(prevState => !prevState)
   }
   return (
-    <li className="TodoItem">
+    <li className="ExpItem">
       <CompleteIcon
         completed={props.completed}
         onComplete={props.onComplete}
       />
       <div className="description">
         <p
-          className={`TodoItem-p ${props.completed && 'TodoItem-p--complete'}`}
+          className={`ExpItem-p ${props.completed && 'ExpItem-p--complete'}`}
         >
           {props.tittle}
         </p>
@@ -41,4 +41,4 @@ const TodoItem = (props) => {
   );
 }
 
-export { TodoItem };
+export { ExpItem };

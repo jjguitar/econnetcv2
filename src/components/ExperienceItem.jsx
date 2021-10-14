@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import '@styles/ProductItem.scss';
+import '@styles/ExperienceItem.scss';
 import AppContext from '../context/AppContext';
 import addToCartImage from '@icons/bt_add_to_cart.svg';
 
-const ProductItem = ({ exp }) => {
+const ExperienceItem = ({ exp }) => {
   // console.log(exp)
 	const { addToCart } = useContext(AppContext);
 
@@ -12,15 +12,15 @@ const ProductItem = ({ exp }) => {
 	}
 
 	return (
-		<div className="ProductItem">
-      <div className="Product-img__container">
+		<div className="ExperienceItem">
+      <div className="Experience-img__container">
         {/* <img src={exp.images[0]} alt={exp.title} /> */}
       </div>
-      <div className="product-details">
-        <p>{exp.tittle}</p>
+      <div className="experience-details">
+        <p className='experience-details__title'>{exp.tittle}</p>
         <p>{exp.date}</p>
       </div>
-			<div className="product-info">
+			<div className="experience-info">
 				<figure onClick={() => handleClick(exp)} >
 					<img src={addToCartImage} alt="" />
 				</figure>
@@ -29,4 +29,4 @@ const ProductItem = ({ exp }) => {
 	);
 }
 
-export default ProductItem;
+export default ExperienceItem;

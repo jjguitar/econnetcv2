@@ -9,7 +9,7 @@
   }
 }
 
-.ProductList {
+.ExperienceList {
 	display: grid;
   // justify-content: center;
 	grid-template-columns: repeat(auto-fill, 220px);
@@ -20,14 +20,14 @@
   padding-bottom: 10px;
 }
 
-.ProductList::-webkit-scrollbar {
+.ExperienceList::-webkit-scrollbar {
   border-radius: 15px;
   background-color: transparent;
   width: 10px;
   height: 10px;
 }
 
-.ProductList::-webkit-scrollbar-thumb {
+.ExperienceList::-webkit-scrollbar-thumb {
   border-radius: 15px;
   background: linear-gradient(90deg, #EF9183 0%, #F5BA93 100%);
 }

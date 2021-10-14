@@ -1,14 +1,14 @@
 import React from 'react';
-import '../../styles/TodosLoading.css'
+import '../styles/ExpsLoading.css'
 
-const TodosLoading = ({ error }) => {
+const ExpsLoading = ({ error }) => {
   return (
     <div className="LoadingTodo-container">
       <span className="Loading-completeIcon"></span>
-      <p className="LoadingTodo-text">Cargando...</p>
+      <p className="LoadingTodo-text">Cargando TODOs...</p>
       <span className="LoadingTodo-deleteIcon"></span>
     </div>
   )
 }
 
-export { TodosLoading }
+export { ExpsLoading }

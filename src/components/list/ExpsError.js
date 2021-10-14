@@ -1,7 +1,7 @@
 import React from 'react';
 
-const TodosError = () => {
+const ExpsError = () => {
   return <p>Desespérate, hubo un error...</p>
 }
 
-export { TodosError }
+export { ExpsError }

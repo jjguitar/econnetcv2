@@ -1,4 +1,4 @@
-.LoadingTodo-container {
+.LoadingExp-container {
   background: linear-gradient(135.96deg, #2F394B 0%, #212A3A 101.74%);
   color: #F4F6FA;
   position: relative;
@@ -15,7 +15,7 @@
   border-radius: 15px;
 }
 
-.LoadingTodo-text {
+.LoadingExp-text {
   font-size: 18px;
   line-height: 24px;
   font-weight: 400;
@@ -24,20 +24,20 @@
   text-align:left;
 }
 
-.Loading-completeIcon, .LoadingTodo-deleteIcon {
+.Loading-completeIcon, .LoadingExp-deleteIcon {
   border-radius: 50px;
   height: 40px;
   width: 40px;
 }
 
 .Loading-completeIcon,
-.LoadingTodo-deleteIcon {
+.LoadingExp-deleteIcon {
   background: linear-gradient(90deg, rgb(56, 63, 80), rgba(46, 50, 57, 1));
   background-size: 400% 400%;
   animation: loadingAnimation 3s ease-in-out infinite;
 }
 
-.LoadingTodo-container {
+.LoadingExp-container {
   background: linear-gradient(90deg, rgba(46, 50, 57, 1), rgb(56, 63, 80));
   background-size: 400% 400%;
   animation: loadingAnimation 3s ease-in-out infinite;

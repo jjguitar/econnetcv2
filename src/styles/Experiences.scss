@@ -9,10 +9,14 @@
     width: calc(100% - 48px);
     max-width: 1024px;
     text-align: left;
+    margin: 20px 0;
+  }
+  h2 {
+    margin: 0 24px 20px;
   }
 }
 
-.TodoSearch {
+.ExpSearch {
   outline: none;
   height: 45px;
   width: calc(100% - 48px);
@@ -23,13 +27,13 @@
   background: #202635;
 }
 
-.TodoSearch::placeholder {
+.ExpSearch::placeholder {
   padding-left: 20px;
   color: rgba(255, 255, 255, 0.8);
 }
 
 
-// .TodoSearch {
+// .ExpSearch {
 //   background: var(--white);
 //   padding-left: 12px;
 //   margin: 0 30px;
@@ -43,7 +47,7 @@
 //   border-radius: 10px;
 // }
 
-.TodoSearch:focus {
+.ExpSearch:focus {
   outline-color: var(--light-gray);
 }
 
@@ -53,7 +57,7 @@
 }
 
 @media (min-width: 1076px) {
-  .TodoSearch {
+  .ExpSearch {
     width: 100%;
   }
 }

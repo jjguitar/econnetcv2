@@ -23,3 +23,12 @@
 .CreateButton:hover {
   transform: rotate(224deg);
 }
+
+@media (max-width: 490px) {
+  .CreateButton{
+    height: 44px;
+    width: 44px;
+    bottom: 45px;
+    right: 5px;
+  }
+}

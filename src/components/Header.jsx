@@ -20,12 +20,23 @@ const Header = () => {
 		<nav>
 			<img src={menu} alt="menu" className="menu" />
 			<div className="navbar-left">
-				<p className="nav-logo">
-          <Link to='/'>
-            Econnect
-          </Link>
-        </p>
+      <ul>
+					<li>
+						<Link to="/experiences">Experiencias</Link>
+					</li>
+					<li>
+						<a href="/">Procesos</a>
+					</li>
+					<li>
+						<a href="/">Asignaciones</a>
+					</li>
+				</ul>
 			</div>
+      <p className="nav-logo">
+        <Link to='/'>
+          Econnect
+        </Link>
+      </p>
 			<div className="navbar-right">
 				<ul>
 					<li className="navbar-email" onClick={handleToggle}>

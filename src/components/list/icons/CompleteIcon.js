@@ -1,10 +1,10 @@
 import React from 'react';
-import { TodoIcon } from './TodoIcon.js'
+import { ExpIcon } from './ExpIcon.js'
 
 const CompleteIcon = ({ completed, onComplete }) => {
 
   return (
-    <TodoIcon
+    <ExpIcon
       type='check'
       color={completed ? '#4caf50' : 'gray'}
       onClick={onComplete}

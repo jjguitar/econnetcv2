@@ -12,11 +12,11 @@ import { Experiences } from '@pages/Experiences';
 import Orders from '@pages/Orders';
 import NotFound from '@pages/NotFound';
 import AppContext from '../context/AppContext';
-import { useTodos } from '../hooks/useTodos';
+import { useExps } from '../hooks/useExps';
 import '@styles/global.css';
 
 const App = () => {
-	const initialState = useTodos();
+	const initialState = useExps();
 	return (
 		<AppContext.Provider value={initialState}>
 			<HashRouter>

@@ -1,7 +1,7 @@
 /* section {
   width: 100%;
 } */
-.TodoList-container {
+.ExpList-container {
   width: calc(100% - 48px);
   max-width: 1024px;
 }

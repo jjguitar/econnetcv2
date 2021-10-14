@@ -1,15 +1,14 @@
 import React, { useContext } from 'react';
-import ProductItem from '@components/ProductItem';
-// import useGetProducts from '../hooks/useGetProducts';
+import ExperienceItem from '@components/ExperienceItem';
 import AppContext from '../context/AppContext';
 import '@styles/Greetings.scss';
 
 // const API = 'https://api.escuelajs.co/api/v1/products?limit=10&offset=10';
 
-const ProductList = () => {
+const GreetingInformation = () => {
 	// const products = useGetProducts(API);
-  const { searchedTodos, loading } = useContext(AppContext)
-  // console.log(searchedTodos)
+  const { searchedExps, loading } = useContext(AppContext)
+  // console.log(searchedExps)
 
   const expSkeleton = {
     id: 99999999999999999999999,
@@ -21,15 +20,15 @@ const ProductList = () => {
       <h1>Hi Jhon</h1>
       <h3>Good morning</h3>
       {loading &&
-        <ProductItem exp={expSkeleton} key={expSkeleton.id} />
+        <ExperienceItem exp={expSkeleton} key={expSkeleton.id} />
       }
-			<div className="ProductList">
-				{searchedTodos.map(exp => (
-					<ProductItem exp={exp} key={exp.id} />
+			<div className="ExperienceList">
+				{searchedExps.map(exp => (
+					<ExperienceItem exp={exp} key={exp.id} />
 				))}
 			</div>
 		</section>
 	);
 }
 
-export default ProductList;
+export default GreetingInformation;

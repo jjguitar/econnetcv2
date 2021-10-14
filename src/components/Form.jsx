@@ -3,7 +3,7 @@ import '../styles/Form.css'
 import AppContext from '../context/AppContext';
 
 const Form = () => {
-  const { addTodo, setOpenModal, defaultValue, findData, editTodo } = useContext(AppContext)
+  const { addExp, setOpenModal, defaultValue, findData, editExp } = useContext(AppContext)
   const [warningValue, setWarningValue] = React.useState(false)
 
   let defaultValues = {}
@@ -27,9 +27,9 @@ const Form = () => {
     }
 
     if (defaultValue === '') {
-      addTodo(experience)
+      addExp(experience)
     } else {
-      editTodo(experience, defaultValue)
+      editExp(experience, defaultValue)
     }
     setOpenModal(false)
     setWarningValue(false)
@@ -108,17 +108,17 @@ const Form = () => {
       </label>
 
 
-      <div className="TodoForm-buttonContainer">
+      <div className="ExpForm-buttonContainer">
         <button
           type="button"
           onClick={onCancel}
-          className="TodoForm-button TodoForm-button-cancel"
+          className="ExpForm-button ExpForm-button-cancel"
         >
           Cancelar
         </button>
         <button
           type='submit'
-          className="TodoForm-button TodoForm-button-add"
+          className="ExpForm-button ExpForm-button-add"
         >
           {defaultValue !== '' ? 'Actualizar' : 'Añadir'}
         </button>

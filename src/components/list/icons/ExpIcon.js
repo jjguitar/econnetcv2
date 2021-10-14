@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../styles/TodoIcon.css'
+import '../../../styles/ExpIcon.css'
 import CheckSVG from '@icons/Vector.svg'
 import Edit from '@icons/pen.svg'
 import Delete from '@icons/trash.svg'
@@ -28,7 +28,7 @@ const iconTypes = {
   ),
 }
 
-const TodoIcon = ({ type, onClick }) => {
+const ExpIcon = ({ type, onClick }) => {
   return (
     <span
       className={`Icon-container Icon-container--${type}`}
@@ -38,4 +38,4 @@ const TodoIcon = ({ type, onClick }) => {
   )
 }
 
-export { TodoIcon };
+export { ExpIcon };
