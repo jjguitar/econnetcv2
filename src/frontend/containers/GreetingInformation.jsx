@@ -18,7 +18,7 @@ const GreetingInformation = () => {
 	return (
 		<section className="main-container">
       <h1>Hi Jhon</h1>
-      <h3>Good morning</h3>
+      <h3>Good good</h3>
       {loading &&
         <ExperienceItem exp={expSkeleton} key={expSkeleton.id} />
       }
