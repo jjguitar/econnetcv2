@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '@styles/PasswordRecovery.scss';
-import logo from '@logos/logo_yard_sale.svg'
+import '../styles/PasswordRecovery.scss';
+import logo from '../assets/logos/logo_yard_sale.svg'
 
 const PasswordRecovery = () => {
 	return (

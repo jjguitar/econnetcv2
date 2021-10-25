@@ -1,10 +1,19 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import webpack from 'webpack';
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { renderRoutes } from 'react-router-config';
+import { StaticRouter } from 'react-router-dom';
+import serverRoutes from '../frontend/routes/serverRoutes';
+import axios from 'axios'
+import { useExps } from '../frontend/hooks/useExps';
 
 dotenv.config();
 
-const { ENV, PORT } = process.env;
+const { ENV, PORT, API_URL } = process.env;
 const app = express();
 
 if (ENV === 'development') {
@@ -21,9 +30,66 @@ if (ENV === 'development') {
 
 }
 
-app.get('*', (req, res) => {
-  res.send({ hello: 'express' });
-});
+const setResponse = (html) => {
+  return(`
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="assets/app.css" type="text/css"/>
+      <title>React shop</title>
+    </head>
+
+    <body>
+      <div id="app">${html}</div>
+      <div id="modal"></div>
+    </body>
+    <script src="assets/app.js" type="text/javascript"></script>
+    </html>
+
+    `);
+}
+
+const renderApp = async (req, res) => {
+  let initialState = { searchedExps: []};
+  try {
+    let meetings = await axios({
+      url: `${process.env.API_URL}/api/v1/meeting`,
+      method: 'get',
+    });
+    meetings = meetings.data;
+    // console.log(meetings)
+    initialState.searchedExps = meetings
+    console.log(initialState)
+  } catch (err) {
+    initialState = {
+      user: {},
+      myList: [],
+      trends: [],
+      originals: [],
+      searchedExps: []
+    }
+  }
+  const store = createStore(initialState);
+  const html = renderToString(
+
+    <Provider store={store}>
+      <StaticRouter location={req.url} context={{}}>
+        {renderRoutes(serverRoutes)}
+      </StaticRouter>
+    </Provider>
+  );
+
+  res.send(setResponse(html));
+};
+
+app.get('*', renderApp);
 
 app.listen(PORT, (err) => {
   if (err) console.log(err);

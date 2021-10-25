@@ -1,8 +1,9 @@
 import React from 'react';
-import GreetingInformation from '@containers/GreetingInformation';
-import Section from '@containers/Section';
+import GreetingInformation from '../containers/GreetingInformation';
+import Section from '../containers/Section';
 
 const Home = () => {
+  
 	return (
 		<>
 			<GreetingInformation />

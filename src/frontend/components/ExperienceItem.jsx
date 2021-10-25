@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import '@styles/ExperienceItem.scss';
+import '../styles/ExperienceItem.scss';
 import AppContext from '../context/AppContext';
-import addToCartImage from '@icons/bt_add_to_cart.svg';
+import addToCartImage from '../assets/icons/bt_add_to_cart.svg';
 
 const ExperienceItem = ({ exp }) => {
   // console.log(exp)
