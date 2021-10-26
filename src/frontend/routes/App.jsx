@@ -16,9 +16,9 @@ import { useExps } from '../hooks/useExps';
 import '@styles/global.css';
 
 const App = () => {
-	// const initialState = useExps();
+	const initialState = useExps();
 	return (
-		// <AppContext.Provider value={initialState}>
+		<AppContext.Provider value={initialState}>
 			<HashRouter>
 				<Layout>
 					<Switch>
@@ -35,7 +35,7 @@ const App = () => {
 					</Switch>
 				</Layout>
 			</HashRouter>
-		// </AppContext.Provider>
+		</AppContext.Provider>
 	);
 }
 

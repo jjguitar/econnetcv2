@@ -5,10 +5,10 @@ import '../styles/Greetings.scss';
 
 // const API = 'https://api.escuelajs.co/api/v1/products?limit=10&offset=10';
 
-const GreetingInformation = (searchedExps) => {
+const GreetingInformation = () => {
 	// const products = useGetProducts(API);
-  const { loading } = useContext(AppContext)
-  console.log(searchedExps)
+  const { searchedExps, loading } = useContext(AppContext)
+  // console.log(searchedExps)
 
   const expSkeleton = {
     id: 99999999999999999999999,
@@ -19,14 +19,14 @@ const GreetingInformation = (searchedExps) => {
 		<section className="main-container">
       <h1>Hi Jhon</h1>
       <h3>Good good</h3>
-      {/* {loading &&
+      {loading &&
         <ExperienceItem exp={expSkeleton} key={expSkeleton.id} />
       }
 			<div className="ExperienceList">
 				{searchedExps.map(exp => (
 					<ExperienceItem exp={exp} key={exp.id} />
 				))}
-			</div> */}
+			</div>
 		</section>
 	);
 }

@@ -3,8 +3,7 @@ import dotenv from 'dotenv';
 import webpack from 'webpack';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import AppContext from '../frontend/context/AppContext';
 import { renderRoutes } from 'react-router-config';
 import { StaticRouter } from 'react-router-dom';
 import serverRoutes from '../frontend/routes/serverRoutes';
@@ -57,33 +56,33 @@ const setResponse = (html) => {
 }
 
 const renderApp = async (req, res) => {
-  let initialState = { searchedExps: []};
+  let initialState = {
+    searchedExps: [],
+    cart: []
+  };
+  let meetings
   try {
-    let meetings = await axios({
-      url: `${process.env.API_URL}/api/v1/meeting`,
+    meetings = await axios({
+      url: `${API_URL}/api/v1/meeting`,
       method: 'get',
     });
     meetings = meetings.data;
-    // console.log(meetings)
-    initialState.searchedExps = meetings
-    console.log(initialState)
+    console.log('meetings')
+    console.log(meetings)
+    // console.log(initialState)
   } catch (err) {
-    initialState = {
-      user: {},
-      myList: [],
-      trends: [],
-      originals: [],
-      searchedExps: []
-    }
   }
-  const store = createStore(initialState);
+  // const store = createStore(initialState);
+  console.log('meetings 2')
+  console.log(meetings)
+  initialState = {...initialState, ...meetings}
   const html = renderToString(
-
-    <Provider store={store}>
+    
+    <AppContext.Provider value={initialState}>
       <StaticRouter location={req.url} context={{}}>
-        {renderRoutes(serverRoutes)}
+        {renderRoutes(serverRoutes())}
       </StaticRouter>
-    </Provider>
+    </AppContext.Provider>
   );
 
   res.send(setResponse(html));

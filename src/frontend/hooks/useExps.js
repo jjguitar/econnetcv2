@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocalStorage } from './useLocalStorage.js'
 import { idGenerator } from '../utils/KeyGenerator.js'
 
-const useExps = () => {
+const useExps = async () => {
   const {
     item: exps,
     saveItem: saveExps,
