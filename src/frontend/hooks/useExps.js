@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocalStorage } from './useLocalStorage.js'
 import { idGenerator } from '../utils/KeyGenerator.js'
 
-const useExps = async () => {
+const useExps = async ({meetings}) => {
   const {
     item: exps,
     saveItem: saveExps,
@@ -12,7 +12,7 @@ const useExps = async () => {
   const [searchValue, setSearchValue] = React.useState('');
   const [defaultValue, setDefaultValue] = React.useState('');
   const [openModal, setOpenModal] = React.useState(false)
-
+  exps = meetings
   const completedExps = exps.filter(exp => !!exp.completed).length
   const totalExps = exps.length
 

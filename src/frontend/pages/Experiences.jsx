@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
-import { CreateButton } from '@components/CreateButton';
-import { ExpSearch } from '@components/ExpSearch';
-import { Modal } from '@components/modal';
-import { Form } from '@components/Form';
+import { CreateButton } from '../components/CreateButton';
+import { ExpSearch } from '../components/ExpSearch';
+import { Modal } from '../components/modal';
+import { Form } from '../components/Form';
 import { ExpList } from '../components/list/ExpList.js'
 import { ExpsError } from '../components/list/ExpsError.js'
 import { ExpsLoading } from '../components/list/ExpsLoading.js'
 import { EmptyExps } from '../components/list/EmptyExps.js'
 import { ExpItem } from '../components/list/ExpItem.js'
 import AppContext from '../context/AppContext';
-import '@styles/Experiences.scss';
+import '../styles/Experiences.scss';
 
 const Experiences = () => {
   const {

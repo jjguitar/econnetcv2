@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import AppContext from '../context/AppContext';
-import '@styles/CreateButton.scss'
+import '../styles/CreateButton.scss'
 
 const CreateButton = (props) => {
   const { setDefaultValue } = useContext(AppContext);

@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../../styles/ExpIcon.css'
-import CheckSVG from '@icons/Vector.svg'
-import Edit from '@icons/pen.svg'
-import Delete from '@icons/trash.svg'
+import CheckSVG from '../../../assets/icons/Vector.svg'
+import Edit from '../../../assets/icons/pen.svg'
+import Delete from '../../../assets/icons/trash.svg'
 
 const iconTypes = {
   'check': () => (

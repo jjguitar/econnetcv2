@@ -3,12 +3,15 @@ import dotenv from 'dotenv';
 import webpack from 'webpack';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import AppContext from '../frontend/context/AppContext';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import { renderRoutes } from 'react-router-config';
 import { StaticRouter } from 'react-router-dom';
 import serverRoutes from '../frontend/routes/serverRoutes';
-import axios from 'axios'
-import { useExps } from '../frontend/hooks/useExps';
+import AppContext from '../frontend/context/AppContext';
+import axios from 'axios';
+
+import reducer from '../frontend/reducers';
 
 dotenv.config();
 
@@ -29,8 +32,8 @@ if (ENV === 'development') {
 
 }
 
-const setResponse = (html) => {
-  return(`
+const setResponse = (html, preloadedState) => {
+  return (`
     <!DOCTYPE html>
     <html lang="en">
 
@@ -41,51 +44,54 @@ const setResponse = (html) => {
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="assets/app.css" type="text/css"/>
+      <link rel="stylesheet" href="assets/app.css" type="text/css">
       <title>React shop</title>
     </head>
 
     <body>
       <div id="app">${html}</div>
+      <script id="preloadedState">
+        window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+      </script>
       <div id="modal"></div>
     </body>
     <script src="assets/app.js" type="text/javascript"></script>
+
     </html>
+  `);
+};
 
-    `);
-}
+const renderApp = async(req, res) => {
+  let initialState;
 
-const renderApp = async (req, res) => {
-  let initialState = {
-    searchedExps: [],
-    cart: []
-  };
-  let meetings
+  // console.log(API_URL)
+  let meetings;
   try {
     meetings = await axios({
       url: `${API_URL}/api/v1/meeting`,
       method: 'get',
     });
     meetings = meetings.data;
-    console.log('meetings')
-    console.log(meetings)
-    // console.log(initialState)
+    initialState ={
+      meetings: meetings,
+      cart: []
+    }
+    console.log(initialState)
   } catch (err) {
   }
-  // const store = createStore(initialState);
-  console.log('meetings 2')
-  console.log(meetings)
-  initialState = {...initialState, ...meetings}
+
+  const store = createStore(reducer, initialState);
+  const preloadedState = store.getState();
+  // console.log(preloadedState)
   const html = renderToString(
-    
-    <AppContext.Provider value={initialState}>
+    <Provider store={store}>
       <StaticRouter location={req.url} context={{}}>
-        {renderRoutes(serverRoutes())}
+        {renderRoutes(serverRoutes)}
       </StaticRouter>
-    </AppContext.Provider>
+    </Provider>,
   );
 
-  res.send(setResponse(html));
+  res.send(setResponse(html, preloadedState));
 };
 
 app.get('*', renderApp);
