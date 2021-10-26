@@ -2,14 +2,23 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+require('dotenv').config();
+
+const isDev = (process.env.ENV === 'development');
+const entry = ['./src/frontend/index.js'];
+
+if (isDev) {
+  entry.push('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true');
+}
+
 module.exports = {
-	entry: ['./src/frontend/index.js',  'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true'],
+	entry,
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'assets/app.js',
 		publicPath: '/'
 	},
-	mode: 'development',
+	mode: process.env.ENV,
 	resolve: {
 		extensions: ['.js', '.jsx'],
 		alias: {
@@ -32,14 +41,6 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.html$/,
-				use: [
-					{
-						loader: 'html-loader'
-					}
-				]
-			},
-			{
 				test: /\.(css|scss)$/,
 				use: [
 					"style-loader",
@@ -48,13 +49,14 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.(png|svg|jpg|gif)$/,
+				test: /\.(png|svg|jpg|gif|SVG)$/,
 				type: 'asset'
 			}
 		]
 	},
 	plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    isDev ? new webpack.HotModuleReplacementPlugin() :
+      () => { },
 		new MiniCssExtractPlugin({
 			filename: 'assets/app.css'
 		}),

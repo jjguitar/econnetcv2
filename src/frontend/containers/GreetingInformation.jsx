@@ -17,7 +17,7 @@ const GreetingInformation = ({meetings}) => {
     date: 'YYYY-MM-DD...'
   }
 	return (
-		<section className="main-container">
+		<div className="main-container">
       <h1>Hi Jhon</h1>
       <h3>Good good</h3>
       {/* {loading &&
@@ -28,7 +28,7 @@ const GreetingInformation = ({meetings}) => {
 					<ExperienceItem exp={exp} key={exp.id} />
 				))}
 			</div>
-		</section>
+		</div>
 	);
 }
 

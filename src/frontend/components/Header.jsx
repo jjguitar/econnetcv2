@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import '@styles/Header.scss';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Menu from '../components/Menu';
 import MyOrder from '../containers/MyOrder';
@@ -7,10 +8,10 @@ import menu from '@icons/icon_menu.svg';
 import AppContext from '../context/AppContext';
 import shoppingCart from '@icons/avatar.png';
 
-const Header = () => {
+const Header = (cart) => {
 	const [toggle, setToggle] = useState(false);
 	const [toggleOrders, setToggleOrders] = useState(false);
-	const { state } = useContext(AppContext);
+	// const { state } = useContext(AppContext);
 
 	const handleToggle = () => {
 		setToggle(!toggle);
@@ -47,7 +48,7 @@ const Header = () => {
 						onClick={() => setToggleOrders(!toggleOrders)}
 					>
 						<img className="nav-avatar" src={shoppingCart} alt="shopping cart" />
-						{state.cart.length > 0 ? <div>{state.cart.length}</div> : null}
+						{cart.length > 0 ? <div>{cart.length}</div> : null}
 					</li>
 				</ul>
 			</div>
@@ -57,4 +58,10 @@ const Header = () => {
 	);
 }
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    cart: state.cart
+  };
+};
+
+export default connect(mapStateToProps, null)(Header);

@@ -16,26 +16,27 @@ import { useExps } from '../hooks/useExps';
 import '@styles/global.css';
 
 const App = () => {
-	const initialState = useExps();
+  const initial = useExps()
+  console.log(initial)
 	return (
-		<AppContext.Provider value={initialState}>
-			<HashRouter>
-				<Layout>
-					<Switch>
-						<Route exact path="/" component={Home} />
-						<Route exact path="/login" component={Login} />
-						<Route exact path="/password-recovery" component={PasswordRecovery} />
-						<Route exact path="/send-email" component={SendEmail} />
-						<Route exact path="/new-password" component={NewPassword} />
-						<Route exact path="/account" component={MyAccount} />
-						<Route exact path="/signup" component={CreateAccount} />
-						<Route exact path="/experiences" component={Experiences} />
-						<Route exact path="/orders" component={Orders} />
-						<Route path="*" component={NotFound} />
-					</Switch>
-				</Layout>
-			</HashRouter>
-		</AppContext.Provider>
+    <AppContext.Provider value={initial}>
+      <HashRouter>
+        <Layout>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/password-recovery" component={PasswordRecovery} />
+            <Route exact path="/send-email" component={SendEmail} />
+            <Route exact path="/new-password" component={NewPassword} />
+            <Route exact path="/account" component={MyAccount} />
+            <Route exact path="/signup" component={CreateAccount} />
+            <Route exact path="/experiences" component={Experiences} />
+            <Route exact path="/orders" component={Orders} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </Layout>
+      </HashRouter>
+    </AppContext.Provider>
 	);
 }
 

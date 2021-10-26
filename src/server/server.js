@@ -62,7 +62,7 @@ const setResponse = (html, preloadedState) => {
 };
 
 const renderApp = async(req, res) => {
-  let initialState;
+  let initialState = {};
 
   // console.log(API_URL)
   let meetings;

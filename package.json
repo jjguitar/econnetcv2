@@ -5,9 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve --open",
     "start:dev": "nodemon src/server/index",
-    "build": "webpack --mode production"
+    "build": "webpack-cli --config webpack.config.js"
   },
   "keywords": [
     "react",
@@ -21,10 +20,12 @@
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
     "@babel/register": "^7.15.3",
+    "asset-require-hook": "^1.2.0",
     "axios": "^0.21.4",
     "babel-loader": "^8.2.2",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "helmet": "^4.6.0",
     "history": "^4.10.1",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.2",
@@ -46,6 +47,7 @@
   },
   "devDependencies": {
     "css-loader": "^6.2.0",
+    "file-loader": "5.1.0",
     "mini-css-extract-plugin": "^2.2.0",
     "sass": "^1.38.0",
     "sass-loader": "^12.1.0",
