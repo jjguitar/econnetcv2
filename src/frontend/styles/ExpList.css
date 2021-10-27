@@ -2,6 +2,7 @@
   width: 100%;
 } */
 .ExpList-container {
+  margin-bottom: 100px;
   width: calc(100% - 48px);
   max-width: 1024px;
 }

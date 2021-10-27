@@ -25,7 +25,7 @@ const Experiences = (props) => {
   // } = await useExps()
   console.log(props)
 	return (
-		<div className="Experience">
+		<section className="Experience">
       <h1>Experiencias</h1>
       <ExpSearch/>
 
@@ -61,7 +61,7 @@ const Experiences = (props) => {
       <CreateButton
         setOpenModal={() => props.setModal()}
       />
-		</div>
+		</section>
 	);
 }
 

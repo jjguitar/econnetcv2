@@ -49,8 +49,15 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.(png|svg|jpg|gif|SVG)$/,
-				type: 'asset'
+				test: /\.(svg|jpg|gif|png)$/,
+        use: [
+          {
+            'loader': 'file-loader',
+            options: {
+                name: 'assets/[md5:hash].[ext]',
+            }
+          }
+        ]
 			}
 		]
 	},

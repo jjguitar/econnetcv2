@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import '../styles/ExperienceItem.scss';
-import AppContext from '../context/AppContext';
+import { dateFn } from '../utils/dateFn'
 import addToCartImage from '../assets/icons/bt_add_to_cart.svg';
 
 const ExperienceItem = ({ exp }) => {
@@ -10,18 +10,6 @@ const ExperienceItem = ({ exp }) => {
 	const handleClick = item => {
 		// addToCart(item);
 	}
-
-  const dateFn = (time) => {
-    let format = 'yyyy-mm-dd'
-    const dateToday = new Date(time);
-    // console.log(dateToday)
-    const map = {
-        dd: dateToday.getDate(),
-        mm: dateToday.getMonth() + 1,
-        yyyy: dateToday.getFullYear()
-    }
-    return format.replace(/dd|mm|yyyy/gi, matched => map[matched])
-  }
 
 	return (
 		<div className="ExperienceItem">

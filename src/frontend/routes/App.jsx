@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter  , Switch, Route } from 'react-router-dom';
+import { HashRouter  , Switch, Route } from 'react-router-dom';
 import Layout from '@containers/Layout';
 import Home from '@pages/Home';
 import Login from '@pages/Login';
@@ -17,7 +17,7 @@ import '@styles/global.css';
 
 const App = () => {
 	return (
-    <BrowserRouter >
+    <HashRouter>
       <Layout>
         <Switch>
           <Route exact path="/" component={Home} />
@@ -32,7 +32,7 @@ const App = () => {
           <Route path="*" component={NotFound} />
         </Switch>
       </Layout>
-    </BrowserRouter>
+    </HashRouter>
 	);
 }
 

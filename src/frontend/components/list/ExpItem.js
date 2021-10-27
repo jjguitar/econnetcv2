@@ -4,6 +4,7 @@ import { CompleteIcon } from './icons/CompleteIcon.js'
 import { DeleteIcon } from './icons/DeleteIcon.js'
 import { EditIcon } from './icons/EditIcon.js'
 import AppContext from '../../context/AppContext'
+import { dateFn } from '../../utils/dateFn'
 
 const ExpItem = (props) => {
 
@@ -25,7 +26,7 @@ const ExpItem = (props) => {
         >
           {props.tittle}
         </p>
-        <p className='description-date'>{props.date}</p>
+        <p className='description-date'>{dateFn(props.date)}</p>
       </div>
       <div className="container">
         <ul className="menu-item__icons">
