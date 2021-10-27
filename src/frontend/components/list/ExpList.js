@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
-import AppContext from '../../context/AppContext'
+import AppContext from '../../context/AppContext';
+import { connect } from 'react-redux';
+import { setModal } from '../../actions/index'
 import '../../styles/ExpList.css'
 
 const ExpList = (props) => {
@@ -8,16 +10,27 @@ const ExpList = (props) => {
 
   return (
     <section className="ExpList-container">
-      {error && props.onError()}
+      {/* {error && props.onError()}
       {loading && props.onLoading()}
       {(!loading && !totalExps) && props.onEmptyExps()}
-      {!!totalExps &&  !searchedExps.length && props.onEmptySearchResults(props.searchText)}
+      {!!totalExps &&  !searchedExps.length && props.onEmptySearchResults(props.searchText)} */}
 
       <ul>
-        {searchedExps.map(renderFunc)}
+        {props.searchedExps.map(renderFunc)}
       </ul>
     </section>
   )
 }
 
-export { ExpList };
+const mapStateToProps = state => {
+  return {
+    searchedExps : state.meetings
+  };
+};
+
+const mapDispatchToProps = {
+  setModal,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpList);
+

@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
+import { connect } from 'react-redux';
+import { setModal, findData, registerMeeting } from '../actions/index'
 import '../styles/Form.css'
 import AppContext from '../context/AppContext';
 
-const Form = () => {
-  const { addExp, setOpenModal, defaultValue, findData, editExp } = useContext(AppContext)
+const Form = ({findData, defaultValue, setModal, registerMeeting}) => {
+  // const { addExp, setOpenModal, defaultValue, findData, editExp } = useContext(AppContext)
   const [warningValue, setWarningValue] = React.useState(false)
 
   let defaultValues = {}
@@ -11,7 +13,7 @@ const Form = () => {
     defaultValues = findData(defaultValue)
   }
   const onCancel = () => {
-    setOpenModal(false)
+    setModal(false)
   }
 
   const onSubmit = (event) => {
@@ -25,13 +27,13 @@ const Form = () => {
       isVolunteerRequired: target.isVolunteerRequired.value,
       idTitle: target.tittle.defaultValue
     }
-
+    // console.log(experience)
     if (defaultValue === '') {
-      addExp(experience)
+      registerMeeting(experience)
     } else {
       editExp(experience, defaultValue)
     }
-    setOpenModal(false)
+    setModal(false)
     setWarningValue(false)
   }
 
@@ -127,4 +129,16 @@ const Form = () => {
   )
 }
 
-export { Form }
+const mapStateToProps = state => {
+  return {
+    defaultValue: state.defaultValue
+  };
+};
+
+const mapDispatchToProps = {
+  setModal,
+  findData,
+  registerMeeting
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

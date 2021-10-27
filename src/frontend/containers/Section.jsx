@@ -4,13 +4,15 @@ import '../styles/Section.scss';
 
 const Section = ({ route, nameSection}) => {
 	return (
-    <Link to={route} className="Section">
-      <div className="section-divider">
-      </div>
-      <div className="section-name">
-        <p>{nameSection}</p>
-      </div>
+    <>
+      <Link to={route} className="Section">
+        <div className="section-divider">
+        </div>
+        <div className="section-name">
+          <p>{nameSection}</p>
+        </div>
     </Link>
+    </>
 	);
 }
 

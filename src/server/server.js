@@ -17,6 +17,7 @@ dotenv.config();
 
 const { ENV, PORT, API_URL } = process.env;
 const app = express();
+app.use(express.json())
 
 if (ENV === 'development') {
   console.log('Development config');
@@ -62,7 +63,13 @@ const setResponse = (html, preloadedState) => {
 };
 
 const renderApp = async(req, res) => {
-  let initialState = {};
+  let initialState = {
+    meetings: [],
+    cart: [],
+    openModal: false,
+    findData: {},
+    defaultValue: '',
+  };
 
   // console.log(API_URL)
   let meetings;
@@ -73,6 +80,7 @@ const renderApp = async(req, res) => {
     });
     meetings = meetings.data;
     initialState ={
+      ...initialState,
       meetings: meetings,
       cart: []
     }
@@ -93,6 +101,36 @@ const renderApp = async(req, res) => {
 
   res.send(setResponse(html, preloadedState));
 };
+
+app.post("/meetings", async function (req, res, next) {
+  const { body } = req
+  console.log(body)
+  let reqVolunteer = false
+  if(body.isVolunteerRequired === '1') {
+    reqVolunteer = !reqVolunteer
+  }
+
+  try {
+    const meetingData = await axios({
+      url: `${API_URL}/api/v1/meeting`,
+      method: "post",
+      data: {
+        'name': body.tittle,
+        'date': body.date,
+        'description': body.description,
+        'reqVolunteer': reqVolunteer
+      }
+    });
+    res.status(201).json({
+      // console.log(req.body)
+      // email: req.body.email,
+      // id: meetingData.data.id
+    });
+  } catch (error) {
+    next(error);
+  }
+  console.log(res.body)
+});
 
 app.get('*', renderApp);
 
