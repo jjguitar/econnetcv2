@@ -18,7 +18,9 @@ const ExperienceItem = ({ exp }) => {
       </div>
       <div className="experience-details">
         <p className='experience-details__title'>{exp.name}</p>
-        <p>{dateFn(exp.date)}</p>
+        <p>
+          {!exp.load && dateFn(exp.date)}
+        </p>
       </div>
 			<div className="experience-info">
 				<figure onClick={() => handleClick(exp)} >

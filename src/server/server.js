@@ -64,29 +64,30 @@ const setResponse = (html, preloadedState) => {
 
 const renderApp = async(req, res) => {
   let initialState = {
-    meetings: [],
+    // meetings: [],
     cart: [],
     openModal: false,
     findData: {},
     defaultValue: '',
+    loading: true,
   };
 
   // console.log(API_URL)
-  let meetings;
-  try {
-    meetings = await axios({
-      url: `${API_URL}/api/v1/meeting`,
-      method: 'get',
-    });
-    meetings = meetings.data;
-    initialState ={
-      ...initialState,
-      meetings: meetings,
-      cart: []
-    }
-    console.log(initialState)
-  } catch (err) {
-  }
+  // let meetings;
+  // try {
+  //   meetings = await axios({
+  //     url: `${API_URL}/api/v1/meeting`,
+  //     method: 'get',
+  //   });
+  //   meetings = meetings.data;
+  //   initialState ={
+  //     ...initialState,
+  //     meetings: meetings,
+  //     cart: []
+  //   }
+  //   console.log(initialState)
+  // } catch (err) {
+  // }
 
   const store = createStore(reducer, initialState);
   const preloadedState = store.getState();
@@ -120,6 +121,31 @@ app.post("/meetings", async function (req, res, next) {
         'description': body.description,
         'reqVolunteer': reqVolunteer
       }
+    });
+    res.status(201).json({
+      // console.log(req.body)
+      // email: req.body.email,
+      // id: meetingData.data.id
+    });
+  } catch (error) {
+    next(error);
+  }
+  console.log(res.body)
+});
+
+app.post("/deleteMeeting", async function (req, res, next) {
+  const { body } = req
+  console.log('delete')
+  console.log(req)
+  let reqVolunteer = false
+  if(body.isVolunteerRequired === '1') {
+    reqVolunteer = !reqVolunteer
+  }
+
+  try {
+    const meetingData = await axios({
+      url: `${API_URL}/api/v1/meeting/${body.id}`,
+      method: "delete"
     });
     res.status(201).json({
       // console.log(req.body)

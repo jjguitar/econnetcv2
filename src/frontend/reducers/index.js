@@ -17,6 +17,16 @@ const reducer = (state, action) => {
       }
     case 'LOGIN_REQUEST':
     case 'REGISTER_REQUEST':
+    case 'REGISTER_DATA':
+      return {
+        ...state,
+        meetings: action.payload
+      }
+    case 'SET_LOAD':
+      return {
+        ...state,
+        loading: action.payload,
+      }
     case 'LOGOUT_REQUEST':
       return {
         ...state,

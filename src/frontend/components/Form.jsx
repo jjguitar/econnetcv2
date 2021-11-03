@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
-import { setModal, findData, registerMeeting } from '../actions/index'
+import { setModal, findData, registerMeeting, setLoad } from '../actions/index'
 import '../styles/Form.css'
 import AppContext from '../context/AppContext';
 
-const Form = ({findData, defaultValue, setModal, registerMeeting}) => {
+const Form = ({findData, defaultValue, setModal, registerMeeting, setLoad}) => {
   // const { addExp, setOpenModal, defaultValue, findData, editExp } = useContext(AppContext)
   const [warningValue, setWarningValue] = React.useState(false)
 
@@ -13,7 +13,7 @@ const Form = ({findData, defaultValue, setModal, registerMeeting}) => {
     defaultValues = findData(defaultValue)
   }
   const onCancel = () => {
-    setModal(false)
+    setModal()
   }
 
   const onSubmit = (event) => {
@@ -29,11 +29,12 @@ const Form = ({findData, defaultValue, setModal, registerMeeting}) => {
     }
     // console.log(experience)
     if (defaultValue === '') {
+      setLoad(true)
       registerMeeting(experience)
     } else {
       editExp(experience, defaultValue)
     }
-    setModal(false)
+    // setModal(false)
     setWarningValue(false)
   }
 
@@ -43,10 +44,11 @@ const Form = ({findData, defaultValue, setModal, registerMeeting}) => {
     const dateToday = new Date(time);
     // console.log(dateToday)
     const map = {
-        dd: dateToday.getDate(),
+        dd: dateToday.getDate(),//agregar cero si es menor a 9
         mm: dateToday.getMonth() + 1,
         yyyy: dateToday.getFullYear()
     }
+    console.log(format.replace(/dd|mm|yyyy/gi, matched => map[matched]))
     return format.replace(/dd|mm|yyyy/gi, matched => map[matched])
   }
 
@@ -79,7 +81,10 @@ const Form = ({findData, defaultValue, setModal, registerMeeting}) => {
       <label className="date" htmlFor="start">Start date:</label>
 
       <input name='date' type="date" id="start"
-        defaultValue={defaultValue !== '' ? defaultValues[0].date : dateTodayFn()}
+        defaultValue={dateTodayFn()}
+        // defaultValue={'2021-11-02'}
+        // defaultValue={defaultValue !== '' ? defaultValues[0].date : dateTodayFn()}
+        //2021-11-2
         min="2018-01-01"
         required
       />
@@ -138,7 +143,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   setModal,
   findData,
-  registerMeeting
+  registerMeeting,
+  setLoad
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

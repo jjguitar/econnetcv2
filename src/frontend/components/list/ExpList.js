@@ -5,7 +5,7 @@ import { setModal } from '../../actions/index'
 import '../../styles/ExpList.css'
 
 const ExpList = (props) => {
-  const { error, loading, totalExps, searchedExps} = useContext(AppContext)
+  // const { error, loading, totalExps, searchedExps} = useContext(AppContext)
   const renderFunc = props.children || props.render;
 
   return (
@@ -16,7 +16,7 @@ const ExpList = (props) => {
       {!!totalExps &&  !searchedExps.length && props.onEmptySearchResults(props.searchText)} */}
 
       <ul>
-        {props.searchedExps.map(renderFunc)}
+        {!props.loading && props.searchedExps.map(renderFunc)}
       </ul>
     </section>
   )
@@ -24,7 +24,8 @@ const ExpList = (props) => {
 
 const mapStateToProps = state => {
   return {
-    searchedExps : state.meetings
+    searchedExps : state.meetings,
+    loading: state.loading
   };
 };
 

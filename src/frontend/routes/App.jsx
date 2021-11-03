@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { HashRouter  , Switch, Route } from 'react-router-dom';
 import Layout from '@containers/Layout';
 import Home from '@pages/Home';
@@ -11,11 +11,16 @@ import CreateAccount from '@pages/CreateAccount';
 import Experiences from '@pages/Experiences';
 import Orders from '@pages/Orders';
 import NotFound from '@pages/NotFound';
+import { setModal, loadData } from '../actions/index';
+import { connect } from 'react-redux';
 import AppContext from '../context/AppContext';
 import { useExps } from '../hooks/useExps';
 import '@styles/global.css';
 
-const App = () => {
+const App = ({loadData}) => {
+  useEffect(() => {
+    loadData()
+  },[]);
 	return (
     <HashRouter>
       <Layout>
@@ -36,4 +41,16 @@ const App = () => {
 	);
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    meetings: state.meetings,
+    loading: state.loading,
+  };
+};
+
+const mapDispatchToProps = {
+  setModal,
+  loadData
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
