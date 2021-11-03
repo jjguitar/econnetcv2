@@ -20,7 +20,8 @@ import '@styles/global.css';
 
 const App = ({loadData}) => {
   useEffect(() => {
-    loadData()
+    loadData('process')
+    loadData('meeting')
   },[]);
 	return (
     <HashRouter>

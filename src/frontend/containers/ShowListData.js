@@ -17,14 +17,14 @@ const ShowListData = (props) => {
 	return (
 		<section className="Experience">
       <h1>{props.namePage}</h1>
-      <ExpSearch/>
+      <ExpSearch load={props.load}/>
 
       <ExpList
         // onError={() => <ExpsError />}
         onLoading={() => <ExpsLoading />}
         onEmptyExps={() => <EmptyExps />}
         searchText={props.searchValue}
-
+        load={props.load}
         onEmptySearchResults={(searchText) => (
           <p className="NotFoundMessage">No hay resultado para {searchText} </p>
         )}

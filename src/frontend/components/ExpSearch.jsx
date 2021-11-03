@@ -1,22 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
-import AppContext from '../context/AppContext';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { setSearchValue, findData } from '../actions/index'
-import useGetProducts from '../hooks/useGetProducts';
-import axios from 'axios';
-// import '../../assets/styles/ExpSearch.css'
+import { setSearchValue, findData } from '../actions/index';
 
-const ExpSearch = ({searchValue, setSearchValue, meetings, loading, findData}) => {
+const ExpSearch = ({searchValue, setSearchValue, meetings, loading, findData, load, process}) => {
 
-  // loadData()
-	// useEffect(async () => {
-	// 	const response = await axios('http://localhost:3000/api/v1/meeting');
-	// 	setProducts(response.data);
-	// }, [setLoadings(false)]);
-  // // const { loading, totalExps, searchValue, setSearchValue } = useContext(AppContext);
+  useEffect(() => {
+    setSearchValue('')
+    findData()
+  },[]);
 
-  // console.log(products);
-  // console.log(loadings);
+  let searched = load === 'meeting' ? meetings : process
+
   const onSearchValueChange = async (event) => {
     event.preventDefault()
     console.log(event.target.value);
@@ -26,14 +20,14 @@ const ExpSearch = ({searchValue, setSearchValue, meetings, loading, findData}) =
 
   return (
     <React.Fragment>
-      {(meetings.length > 0) ?
+      {(searched.length > 0) ?
         <input
           className="ExpSearch"
-          placeholder="Busca tus Experiencias"
+          placeholder={`Busca tus ${load}`}
           value={searchValue}
           onChange={onSearchValueChange}
         /> :
-        loading ? <h2 className="ExpSearch-loading">Exp en un solo lugar.</h2> : <h2>Aún no tienes Experiencias...</h2>
+        loading ? <h2 className="ExpSearch-loading">Exp en un solo lugar.</h2> : <h2>Aún no tienes {load}...</h2>
       }
     </React.Fragment>
   );
@@ -43,6 +37,7 @@ const mapStateToProps = state => {
   return {
     openModal: state.openModal,
     meetings: state.meetings,
+    process: state.process,
     searchValue: state.searchValue,
     loading: state.loading,
   };

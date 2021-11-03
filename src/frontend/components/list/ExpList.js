@@ -1,21 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setModal } from '../../actions/index'
+import { setModal, loadData } from '../../actions/index'
 import '../../styles/ExpList.css'
 
 const ExpList = (props) => {
-  // const { error, loading, totalExps, searchedExps} = useContext(AppContext)
+
   const renderFunc = props.children || props.render;
+  // props.loadData(props.load)
+  let data = props.load === 'meeting' ? props.meetings : props.process
+  let searched = props.load === 'meeting' ? props.searchedExps : props.searchedProcess
+  console.log(props.load)
+  console.log(data)
 
   return (
     <section className="ExpList-container">
       {/* {error && props.onError()} */}
       {props.loading && props.onLoading()}
-      {(!props.loading && !props.meetings.length) && props.onEmptyExps()}
-      {!!props.meetings.length &&  !props.searchedExps.length && props.onEmptySearchResults(props.searchText)}
+      {(!props.loading && !data.length) && props.onEmptyExps()}
+      {!!data.length &&  !searched.length && props.onEmptySearchResults(props.searchText)}
 
       <ul>
-        {!props.loading && props.searchedExps.map(renderFunc)}
+        {!props.loading && searched.map(renderFunc)}
       </ul>
     </section>
   )
@@ -24,13 +29,16 @@ const ExpList = (props) => {
 const mapStateToProps = state => {
   return {
     searchedExps : state.searchedExps,
+    searchedProcess : state.searchedProcess,
     loading: state.loading,
     meetings: state.meetings,
+    process: state.process,
   };
 };
 
 const mapDispatchToProps = {
   setModal,
+  loadData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpList);

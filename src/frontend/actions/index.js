@@ -10,6 +10,11 @@ export const registerData = payload => ({
   payload,
 });
 
+export const registerDataProcess = payload => ({
+  type: 'REGISTER_DATA_PROCESS',
+  payload,
+});
+
 export const setLoad = payload => ({
   type: 'SET_LOAD',
   payload,
@@ -20,12 +25,20 @@ export const findData = (payload) => ({
   payload,
 })
 
-export const loadData = () => {
+export const loadData = (payload) => {
   console.log('loadData');
-  // console.log(payload);
+  if(!payload) payload = 'meeting'
+  console.log('payload');
+  console.log(payload);
   return (dispatch) => {
-    axios.get('http://localhost:3000/api/v1/meeting')
-      .then(({ data }) => dispatch(registerData(data)))
+    axios.get(`http://localhost:3000/api/v1/${payload}`)
+      .then(({ data }) => {
+        if (payload === 'meeting') {
+          dispatch(registerData(data))
+        }else {
+          dispatch(registerDataProcess(data))
+        }
+      })
       .then(() => dispatch(findData()))
       .then(() => dispatch(setLoad(false)))
       .catch(error => dispatch(setError(error)))

@@ -73,6 +73,8 @@ const renderApp = async(req, res) => {
     error: false,
     searchValue: '',
     searchedExps: [],
+    process: [],
+    searchedProcess: [],
   };
 
   // console.log(API_URL)

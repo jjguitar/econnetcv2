@@ -17,6 +17,11 @@ const reducer = (state, action) => {
       }
     case 'LOGIN_REQUEST':
     case 'REGISTER_REQUEST':
+    case 'REGISTER_DATA_PROCESS':
+      return {
+        ...state,
+        process: action.payload
+      }
     case 'REGISTER_DATA':
       return {
         ...state,
@@ -47,10 +52,18 @@ const reducer = (state, action) => {
       // const newExps = [...state.meetings]
       // return newExps.find(item => item.id === (action.payload))
       let newExps = []
+      let newProcess = []
       if(!state.searchValue.length >= 1) {
         newExps = state.meetings
+        newProcess = state.process
       } else {
         newExps = state.meetings.filter(exp => {
+          const expText = exp.name.toLowerCase()
+          const searchedText = state.searchValue.toLowerCase()
+    
+          return expText.includes(searchedText)
+        })
+        newProcess = state.process.filter(exp => {
           const expText = exp.name.toLowerCase()
           const searchedText = state.searchValue.toLowerCase()
     
@@ -59,7 +72,8 @@ const reducer = (state, action) => {
       }
       return {
         ...state,
-        searchedExps: newExps
+        searchedExps: newExps,
+        searchedProcess: newProcess
       }
     default:
       return state;
