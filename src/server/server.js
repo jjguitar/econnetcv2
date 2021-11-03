@@ -64,12 +64,15 @@ const setResponse = (html, preloadedState) => {
 
 const renderApp = async(req, res) => {
   let initialState = {
-    // meetings: [],
+    meetings: [],
     cart: [],
     openModal: false,
     findData: {},
     defaultValue: '',
     loading: true,
+    error: false,
+    searchValue: '',
+    searchedExps: [],
   };
 
   // console.log(API_URL)
@@ -105,7 +108,7 @@ const renderApp = async(req, res) => {
 
 app.post("/meetings", async function (req, res, next) {
   const { body } = req
-  console.log(body)
+  // console.log(body)
   let reqVolunteer = false
   if(body.isVolunteerRequired === '1') {
     reqVolunteer = !reqVolunteer
@@ -135,8 +138,8 @@ app.post("/meetings", async function (req, res, next) {
 
 app.post("/deleteMeeting", async function (req, res, next) {
   const { body } = req
-  console.log('delete')
-  console.log(req)
+  // console.log('delete')
+  // console.log(req)
   let reqVolunteer = false
   if(body.isVolunteerRequired === '1') {
     reqVolunteer = !reqVolunteer

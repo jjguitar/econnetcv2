@@ -44,7 +44,7 @@ const Form = ({findData, defaultValue, setModal, registerMeeting, setLoad}) => {
     const dateToday = new Date(time);
     // console.log(dateToday)
     const map = {
-        dd: dateToday.getDate(),//agregar cero si es menor a 9
+        dd: dateToday.getDate() < 9 ? `0${dateToday.getDate()}` : dateToday.getDate(),//agregar cero si es menor a 9
         mm: dateToday.getMonth() + 1,
         yyyy: dateToday.getFullYear()
     }

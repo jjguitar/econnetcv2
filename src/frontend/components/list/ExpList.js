@@ -10,10 +10,10 @@ const ExpList = (props) => {
 
   return (
     <section className="ExpList-container">
-      {/* {error && props.onError()}
-      {loading && props.onLoading()}
-      {(!loading && !totalExps) && props.onEmptyExps()}
-      {!!totalExps &&  !searchedExps.length && props.onEmptySearchResults(props.searchText)} */}
+      {/* {error && props.onError()} */}
+      {props.loading && props.onLoading()}
+      {(!props.loading && !props.meetings.length) && props.onEmptyExps()}
+      {!!props.meetings.length &&  !props.searchedExps.length && props.onEmptySearchResults(props.searchText)}
 
       <ul>
         {!props.loading && props.searchedExps.map(renderFunc)}
@@ -24,8 +24,9 @@ const ExpList = (props) => {
 
 const mapStateToProps = state => {
   return {
-    searchedExps : state.meetings,
-    loading: state.loading
+    searchedExps : state.searchedExps,
+    loading: state.loading,
+    meetings: state.meetings,
   };
 };
 

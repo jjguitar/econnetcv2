@@ -31,9 +31,9 @@
   text-align:left;
   word-break: break-all;
 }
-.ExpItem-p--complete {
+/* .ExpItem-p--complete {
   text-decoration: line-through;
-}
+} */
 
 .Icon {
   cursor: pointer;

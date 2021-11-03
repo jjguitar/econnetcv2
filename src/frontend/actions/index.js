@@ -15,12 +15,18 @@ export const setLoad = payload => ({
   payload,
 });
 
+export const findData = (payload) => ({
+  type: 'FIND_DATA',
+  payload,
+})
+
 export const loadData = () => {
   console.log('loadData');
   // console.log(payload);
   return (dispatch) => {
     axios.get('http://localhost:3000/api/v1/meeting')
       .then(({ data }) => dispatch(registerData(data)))
+      .then(() => dispatch(findData()))
       .then(() => dispatch(setLoad(false)))
       .catch(error => dispatch(setError(error)))
   };
@@ -31,8 +37,8 @@ export const registerRequest = payload => ({
   payload,
 });
 
-export const findData = (payload) => ({
-  type: 'FIND_DATA',
+export const setSearchValue = (payload) => ({
+  type: 'SET_SEARCH_VALUE',
   payload,
 })
 

@@ -31,13 +31,13 @@ const Experiences = (props) => {
 
       <ExpList
         // onError={() => <ExpsError />}
-        // onLoading={() => <ExpsLoading />}
-        // onEmptyExps={() => <EmptyExps />}
-        // searchText={searchValue}
+        onLoading={() => <ExpsLoading />}
+        onEmptyExps={() => <EmptyExps />}
+        searchText={props.searchValue}
 
-        // onEmptySearchResults={(searchText) => (
-        //   <p className="NotFoundMessage">No hay resultado para {searchText} </p>
-        // )}
+        onEmptySearchResults={(searchText) => (
+          <p className="NotFoundMessage">No hay resultado para {searchText} </p>
+        )}
       >
         {exp => (
           <ExpItem
@@ -67,7 +67,8 @@ const Experiences = (props) => {
 
 const mapStateToProps = state => {
   return {
-    openModal: state.openModal
+    openModal: state.openModal,
+    searchValue: state.searchValue,
   };
 };
 
