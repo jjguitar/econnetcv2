@@ -9,7 +9,7 @@ const Home = () => {
 			<GreetingInformation />
 			<div className="container-sections">
         <Section route='/experiences' nameSection='Experiencias'/>
-        <Section route='/account' nameSection='Procesos'/>
+        <Section route='/processes' nameSection='Procesos'/>
         <Section route='/orders' nameSection='Asignaciones'/>
       </div>
 		</>

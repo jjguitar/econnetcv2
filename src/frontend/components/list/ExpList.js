@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import AppContext from '../../context/AppContext';
+import React from 'react';
 import { connect } from 'react-redux';
 import { setModal } from '../../actions/index'
 import '../../styles/ExpList.css'

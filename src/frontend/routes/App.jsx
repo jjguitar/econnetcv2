@@ -9,6 +9,7 @@ import NewPassword from '@pages/NewPassword';
 import MyAccount from '@pages/MyAccount';
 import CreateAccount from '@pages/CreateAccount';
 import Experiences from '@pages/Experiences';
+import Processes from '@pages/Processes';
 import Orders from '@pages/Orders';
 import NotFound from '@pages/NotFound';
 import { setModal, loadData } from '../actions/index';
@@ -33,6 +34,7 @@ const App = ({loadData}) => {
           <Route exact path="/account" component={MyAccount} />
           <Route exact path="/signup" component={CreateAccount} />
           <Route exact path="/experiences" component={Experiences} />
+          <Route exact path="/processes" component={Processes} />
           <Route exact path="/orders" component={Orders} />
           <Route path="*" component={NotFound} />
         </Switch>

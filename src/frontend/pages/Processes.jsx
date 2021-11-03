@@ -2,10 +2,10 @@ import React from 'react';
 import ShowListData from '../containers/ShowListData.js'
 
 
-const Experiences = () => {
+const Processes = () => {
   return (
-    <ShowListData namePage={'Experiences'}/>
+    <ShowListData namePage={'Processes'}/>
   )
 }
 
-export default Experiences;
+export default Processes;
