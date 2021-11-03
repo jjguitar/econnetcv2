@@ -19,10 +19,28 @@ const GreetingInformation = ({meetings, loading, loadData }) => {
     date: 'YYYY-MM-DD...',
     load: true,
   }
+  const showGreeting = () => {
+
+    let date = new Date();
+    let hour = date.getHours();
+
+    if(hour >= 0 && hour < 12){
+      return "Good morning";
+    }
+
+    if(hour >= 12 && hour < 18){
+      return "Good afternoon";
+    }
+
+    if(hour >= 18 && hour < 24){
+      return "Good night";
+    }
+  }
+
 	return (
 		<div className="main-container">
       <h1>Hi Jhon</h1>
-      <h3>Good good</h3>
+      <h3>{showGreeting()}</h3>
 			<div className="ExperienceList">
       {loading ?
         <ExperienceItem exp={expSkeleton} key={expSkeleton.id} />
