@@ -3,6 +3,7 @@ import Login from '../pages/Login';
 import PasswordRecovery from '../pages/PasswordRecovery';
 import Experiences from '../pages/Experiences';
 import Processes from '../pages/Processes';
+import Process from '../containers/Process';
 import CreateAccount from '../pages/CreateAccount';
 import NotFound from '../pages/NotFound';
 
@@ -26,6 +27,11 @@ const serverRoutes  = [
       exact: true,
       path: '/password-recovery',
       component: PasswordRecovery,
+    },
+    {
+      exact: true,
+      path: '/process/:id',
+      component: Process,
     },
     {
       exact: true,

@@ -80,6 +80,18 @@
   align-items: center;
 }
 
+.back-button{
+  background-color: var(--hospital-green);
+  border-radius: 8px;
+  border: none;
+  color: var(--white);
+  width: 180px;
+  cursor: pointer;
+  font-size: var(--md);
+  font-weight: bold;
+  height: 50px;
+}
+
 @media (max-width: 640px) {
 	.logo {
 		display: block;

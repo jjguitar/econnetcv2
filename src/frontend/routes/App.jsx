@@ -10,6 +10,7 @@ import MyAccount from '@pages/MyAccount';
 import CreateAccount from '@pages/CreateAccount';
 import Experiences from '@pages/Experiences';
 import Processes from '@pages/Processes';
+import Process from '../containers/Process';
 import Orders from '@pages/Orders';
 import NotFound from '@pages/NotFound';
 import { setModal, loadData } from '../actions/index';
@@ -37,6 +38,7 @@ const App = ({loadData}) => {
           <Route exact path="/experiences" component={Experiences} />
           <Route exact path="/processes" component={Processes} />
           <Route exact path="/orders" component={Orders} />
+          <Route exact path='/process/:id' component={Process} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Layout>

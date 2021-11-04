@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import '../../styles/ExpItem.css'
+import { Link } from 'react-router-dom';
 import { CompleteIcon } from './icons/CompleteIcon.js'
 import { DeleteIcon } from './icons/DeleteIcon.js'
 import { EditIcon } from './icons/EditIcon.js'
@@ -14,8 +15,8 @@ const ExpItem = (props) => {
   const { setDefaultValue } = useContext(AppContext)
 
   const onEditButton = (id) => {
-    setDefaultValue(id)
-    props.setOpenModal(prevState => !prevState)
+    // setDefaultValue(id)
+    // props.setOpenModal(prevState => !prevState)
   }
 
   const onDeleteButton = (id) => {
@@ -33,10 +34,12 @@ const ExpItem = (props) => {
 
   return (
     <li className="ExpItem">
-      <CompleteIcon
-        completed={props.completed}
-        onComplete={() => onDeleteButton(props.id)}
-      />
+      <Link to={`/process/${props.id}`}>
+        <CompleteIcon
+          completed={props.completed}
+          // onComplete={() => onEditButton(props.id)}
+        />
+      </Link>
       <div className="description">
         <p
           className={`ExpItem-p ${props.completed && 'ExpItem-p--complete'}`}
