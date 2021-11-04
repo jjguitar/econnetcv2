@@ -59,6 +59,10 @@ textarea:focus {
   outline-color: #61DAFA;
 }
 
+.ModalBackground > form > .date-form {
+  padding: 20px;
+}
+
 .content-input,
 .content-select select{
 	appearance: none;

@@ -75,6 +75,7 @@ const renderApp = async(req, res) => {
     searchedExps: [],
     process: [],
     searchedProcess: [],
+    users: []
   };
 
   // console.log(API_URL)
@@ -150,6 +151,58 @@ app.post("/deleteMeeting", async function (req, res, next) {
   try {
     const meetingData = await axios({
       url: `${API_URL}/api/v1/meeting/${body.id}`,
+      method: "delete"
+    });
+    res.status(201).json({
+      // console.log(req.body)
+      // email: req.body.email,
+      // id: meetingData.data.id
+    });
+  } catch (error) {
+    next(error);
+  }
+  console.log(res.body)
+});
+
+app.post("/process", async function (req, res, next) {
+  const { body } = req
+  console.log(body)
+  let open = false
+  if(body.open === '1') {
+    open = !open
+  }
+
+  try {
+    const meetingData = await axios({
+      url: `${API_URL}/api/v1/process`,
+      method: "post",
+      data: {
+        'name': body.name,
+        'date': body.date,
+        'description': body.description,
+        'open': open,
+        'userId': body.userId,
+      }
+    });
+    res.status(201).json({
+      // console.log(req.body)
+      // email: req.body.email,
+      // id: meetingData.data.id
+    });
+  } catch (error) {
+    next(error);
+  }
+  console.log(res.body)
+});
+
+app.post("/deleteProcess", async function (req, res, next) {
+  const { body } = req
+  // console.log('delete')
+  // console.log(req)
+
+  try {
+    const meetingData = await axios({
+      url: `${API_URL}/api/v1/process/${body.id}`,
       method: "delete"
     });
     res.status(201).json({

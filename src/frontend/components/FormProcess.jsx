@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { setModal, findData, registerMeeting, setLoad } from '../actions/index'
+import { setModal, findData, registerMeeting, setLoad, loadUsers, registerProcess } from '../actions/index'
 import '../styles/Form.css'
 import AppContext from '../context/AppContext';
 
-const Form = ({findData, defaultValue, setModal, registerMeeting, setLoad}) => {
+const FormProcess = ({findData, defaultValue, setModal, users, registerProcess}) => {
   // const { addExp, setOpenModal, defaultValue, findData, editExp } = useContext(AppContext)
+
   const [warningValue, setWarningValue] = React.useState(false)
 
   let defaultValues = {}
@@ -19,20 +20,20 @@ const Form = ({findData, defaultValue, setModal, registerMeeting, setLoad}) => {
   const onSubmit = (event) => {
     event.preventDefault()
     const target = event.target
-    console.log(target.tittle)
-    let experience = {
-      tittle: target.tittle.value,
+    // console.log(target.tittle)
+    let process = {
+      name: target.tittle.value,
       date: target.date.value,
       description: target.description.value,
-      isVolunteerRequired: target.isVolunteerRequired.value,
-      idTitle: target.tittle.defaultValue
+      open: target.open.value,
+      userId: target.userId.value,
     }
-    // console.log(experience)
+    console.log(process)
     if (defaultValue === '') {
       setLoad(true)
-      registerMeeting(experience)
+      registerProcess(process)
     } else {
-      editExp(experience, defaultValue)
+      // editExp(process, defaultValue)
     }
     // setModal(false)
     setWarningValue(false)
@@ -52,8 +53,9 @@ const Form = ({findData, defaultValue, setModal, registerMeeting, setLoad}) => {
     return format.replace(/dd|mm|yyyy/gi, matched => map[matched])
   }
 
-  const valuesDefault = ['Experiencia de DOMINGO',
-  'Un mismo corazón', 'Romanos', 'Oración de madrugada', 'Aseo general', 'Taller RX']
+  const valuesDefault = ['Lifetrack',
+  'Experiencia RX', 'Romanos', 'Corazón saludable', 'Pre-Matrimonial', 'Matrimonial']
+
   const activeSelect = () => {
     const found = valuesDefault.find(element => element === (defaultValue !== '' ? defaultValues[0].tittle : ''));
 
@@ -62,58 +64,58 @@ const Form = ({findData, defaultValue, setModal, registerMeeting, setLoad}) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <h2 className="center">¿Qué tipo de Experiencia quieres crear?</h2>
+      <h2 className="center">¿Qué tipo de proceso quieres crear?</h2>
       {warningValue && (
         <p className="Warning-text">Para continuar, por favor escribe el detalle de la experiencia.</p>
       )}
       <div className="content-select">
         <select className="" name="tittle" required defaultValue={defaultValue !== '' ? activeSelect() : valuesDefault[0]}>
-          <option value={valuesDefault[0]}>Experiencia de DOMINGO</option>
-          <option value={valuesDefault[1]}>Un mismo corazón</option>
-          <option value={valuesDefault[2]}>Romanos</option>
-          <option value={valuesDefault[3]}>Oración de madrugada</option>
-          <option value={valuesDefault[4]}>Aseo general</option>
-          <option value={valuesDefault[5]}>Taller RX</option>
+          {valuesDefault.map((values) => <option value={values} key={values}>{values}</option>)}
         </select>
-        <i></i>
       </div>
 
       <label className="date" htmlFor="start">Start date:</label>
 
       <input className="date-form" name='date' type="date" id="start"
         defaultValue={dateTodayFn()}
-        // defaultValue={'2021-11-02'}
-        // defaultValue={defaultValue !== '' ? defaultValues[0].date : dateTodayFn()}
-        //2021-11-2
         min="2018-01-01"
         required
       />
       <textarea
         name='description'
         autoFocus={defaultValue !== '' ? false : true}
-        placeholder='Escribe una nueva tarea'
+        placeholder='Escribe una descripción para el proceso'
         required
         defaultValue={defaultValue !== '' ? defaultValues[0].description : ''}
       />
 
-      <p className="volunteer">¿Requiere voluntarios?:</p>
+      <p className="volunteer">¿Proceso abierto?:</p>
       <label htmlFor="volunteer">
         <input
           type="radio"
-          name="isVolunteerRequired"
+          name="open"
           value='1'
           required
           defaultChecked={defaultValue !== '' ? (defaultValues[0].isVolunteerRequired === '1') : true}
         />SI
         <input
           type="radio"
-          name="isVolunteerRequired"
+          name="open"
           value='2'
           required
           defaultChecked={defaultValue !== '' ? !(defaultValues[0].isVolunteerRequired === '1') : false}
         />NO
       </label>
 
+
+      <label className="date">Por favor elige un líder</label>
+      <div className="content-select">
+        <select className="" name="userId" required defaultValue={defaultValue !== '' ? activeSelect() : valuesDefault[0]}>
+          {users.map(user =>
+            <option value={user.id} key={user.id}>{user.name.toUpperCase()}</option>
+          )}
+        </select>
+      </div>
 
       <div className="ExpForm-buttonContainer">
         <button
@@ -136,7 +138,8 @@ const Form = ({findData, defaultValue, setModal, registerMeeting, setLoad}) => {
 
 const mapStateToProps = state => {
   return {
-    defaultValue: state.defaultValue
+    defaultValue: state.defaultValue,
+    users: state.users,
   };
 };
 
@@ -144,7 +147,9 @@ const mapDispatchToProps = {
   setModal,
   findData,
   registerMeeting,
-  setLoad
+  setLoad,
+  loadUsers,
+  registerProcess
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default connect(mapStateToProps, mapDispatchToProps)(FormProcess);

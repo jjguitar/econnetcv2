@@ -5,15 +5,15 @@ import { DeleteIcon } from './icons/DeleteIcon.js'
 import { EditIcon } from './icons/EditIcon.js'
 import AppContext from '../../context/AppContext'
 import { dateFn } from '../../utils/dateFn'
-import { deleteMeeting } from '../../actions/index'
+import { deleteMeeting, deleteProcess } from '../../actions/index'
 import { connect } from 'react-redux';
 
 const ExpItem = (props) => {
   console.log('props id')
-  console.log(props)
+  console.log(props.load)
   const { setDefaultValue } = useContext(AppContext)
 
-  const onClickButton = (id) => {
+  const onEditButton = (id) => {
     setDefaultValue(id)
     props.setOpenModal(prevState => !prevState)
   }
@@ -23,14 +23,19 @@ const ExpItem = (props) => {
       id: id,
     }
     console.log(body)
-    props.deleteMeeting(body)
+    if (props.load === 'meeting') {
+      props.deleteMeeting(body)
+    } else {
+      console.log('process')
+      props.deleteProcess(body)
+    }
   }
 
   return (
     <li className="ExpItem">
       <CompleteIcon
         completed={props.completed}
-        onComplete={props.onComplete}
+        onComplete={() => onDeleteButton(props.id)}
       />
       <div className="description">
         <p
@@ -43,7 +48,7 @@ const ExpItem = (props) => {
       <div className="container">
         <ul className="menu-item__icons">
           <EditIcon
-            onEdit={() => onClickButton(props.id)}
+            onEdit={() => onEditButton(props.id)}
           />
           <DeleteIcon
             onDelete={() => onDeleteButton(props.id)}
@@ -61,7 +66,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  deleteMeeting
+  deleteMeeting,
+  deleteProcess
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpItem);

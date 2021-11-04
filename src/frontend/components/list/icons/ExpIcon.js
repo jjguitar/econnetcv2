@@ -1,12 +1,15 @@
 import React from 'react';
 import '../../../styles/ExpIcon.css'
-import CheckSVG from '../../../assets/icons/Vector.svg'
+import CheckSVG from '../../../assets/icons/adPerson.png'
 import Edit from '../../../assets/icons/pen.svg'
 import Delete from '../../../assets/icons/trash.svg'
 
 const iconTypes = {
-  'check': () => (
-    <div className='icon-container__div'>
+  'check': onClick => (
+    <div
+      className='icon-container__div'
+      onClick={onClick}
+    >
       <img className={"Icon-svg Icon-svg--check"} src={CheckSVG}/>
     </div>
   ),

@@ -17,6 +17,11 @@ const reducer = (state, action) => {
       }
     case 'LOGIN_REQUEST':
     case 'REGISTER_REQUEST':
+    case 'REGISTER_USER_DATA':
+      return {
+        ...state,
+        users: action.payload
+      }
     case 'REGISTER_DATA_PROCESS':
       return {
         ...state,

@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CreateButton } from '../components/CreateButton';
 import ExpSearch from '../components/ExpSearch';
 import { Modal } from '../components/modal';
 import Form from '../components/Form';
+import FormProcess from '../components/FormProcess';
 import ExpList from '../components/list/ExpList.js'
 import { ExpsError } from '../components/list/ExpsError.js'
 import { ExpsLoading } from '../components/list/ExpsLoading.js'
 import { EmptyExps } from '../components/list/EmptyExps.js'
 import ExpItem from '../components/list/ExpItem.js'
 import { connect } from 'react-redux';
-import { setModal } from '../actions/index'
+import { setModal, loadUsers } from '../actions/index'
 import '../styles/Experiences.scss';
 
 const ShowListData = (props) => {
+
+  useEffect(() => {
+    props.loadUsers()
+  },[]);
+
   console.log(props)
 	return (
 		<section className="Experience">
@@ -36,6 +42,7 @@ const ShowListData = (props) => {
             tittle={exp.name}
             date={exp.date}
             completed={exp.reqVolunteer}
+            load={props.load}
             // onComplete={() => toggleExp(exp.id)}
             // onDelete={() => deleteExp(exp.id)}
             // setOpenModal={setOpenModal}
@@ -45,7 +52,7 @@ const ShowListData = (props) => {
 
       {props.openModal && (
         <Modal>
-          <Form />
+          {props.load === 'meeting' ? <Form /> : <FormProcess />}
         </Modal>
       )}
       <CreateButton
@@ -64,6 +71,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   setModal,
+  loadUsers
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowListData);
