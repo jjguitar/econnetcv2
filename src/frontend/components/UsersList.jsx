@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import '../styles/ExpItem.css'
+import '../styles/ExpItem.scss'
 // import { Link } from 'react-router-dom';
 // import { CompleteIcon } from './icons/CompleteIcon.js'
 import { DeleteIcon } from '../components/list/icons/DeleteIcon'

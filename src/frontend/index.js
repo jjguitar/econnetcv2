@@ -17,7 +17,9 @@ const history = createBrowserHistory();
 delete window.__PRELOADED_STATE__;
 document.getElementById("preloadedState").remove()
 
-ReactDOM.hydrate(
+const renderMethod = !!module.hot ? ReactDOM.render : ReactDOM.hydrate
+
+renderMethod(
   <Provider store={store}>
     <Router history={history}>
       <App />

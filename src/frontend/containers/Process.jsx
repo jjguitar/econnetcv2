@@ -69,7 +69,7 @@ const Process = ({ process, history, loadUsers, users, registerUserToProcess }) 
         }
 
         <p className="assign__subtitle">Líder:</p>
-        {typeof leader.name !== 'undefined' ?
+        {processId[0] && leader.name && typeof leader.name !== 'undefined' ?
           <p className="assign__leader">{leader.name.toUpperCase()}</p>
           :
           <p className="assign__leader">Cargando</p>

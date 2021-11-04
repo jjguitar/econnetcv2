@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
-import '../../styles/ExpItem.css'
+import React, { useContext, useState } from 'react';
+import '../../styles/ExpItem.scss'
 import { Link } from 'react-router-dom';
 import { CompleteIcon } from './icons/CompleteIcon.js'
+import { Modal } from '../../components/modal'
 import { DeleteIcon } from './icons/DeleteIcon.js'
 import { EditIcon } from './icons/EditIcon.js'
 import AppContext from '../../context/AppContext'
@@ -12,7 +13,7 @@ import { connect } from 'react-redux';
 const ExpItem = (props) => {
   console.log('props id')
   console.log(props.load)
-  const { setDefaultValue } = useContext(AppContext)
+  const [openModal, setOpenModal] = React.useState(false);
 
   const onEditButton = (id) => {
     // setDefaultValue(id)
@@ -21,7 +22,7 @@ const ExpItem = (props) => {
 
   const onDeleteButton = (id) => {
     const body = {
-      id: id,
+    id: id,
     }
     console.log(body)
     if (props.load === 'meeting') {
@@ -30,6 +31,7 @@ const ExpItem = (props) => {
       console.log('process')
       props.deleteProcess(body)
     }
+    setOpenModal(false)
   }
 
   return (
@@ -54,10 +56,34 @@ const ExpItem = (props) => {
             onEdit={() => onEditButton(props.id)}
           />
           <DeleteIcon
-            onDelete={() => onDeleteButton(props.id)}
+            onDelete={() => setOpenModal(true)}
           />
         </ul>
       </div>
+      {openModal &&
+        <Modal>
+          <form className="form-container__confirm">
+            <h1 className="confirm-title">¿Eliminar la tarea?</h1>
+            <h3>¿Estás seguro de eliminar la tarea {props.tittle} con fecha del {dateFn(props.date)}?</h3>
+            <h3 className='warning-confirm'>Una vez realizada, la acción no se puede deshacer</h3>
+            <div className='button-container__confirm'>
+              <button
+                className='cancel button-confirm'
+                onClick={()=> setOpenModal(false)}
+              >
+                Volver
+              </button>
+              <button
+                className='delete button-confirm'
+                onClick={()=> onDeleteButton(props.id)}
+              >
+                Eliminar
+              </button>
+            </div>
+
+          </form>
+        </Modal>
+      }
     </li>
   );
 }
