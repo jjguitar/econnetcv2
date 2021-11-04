@@ -17,6 +17,11 @@ const reducer = (state, action) => {
       }
     case 'LOGIN_REQUEST':
     case 'REGISTER_REQUEST':
+    case 'DEFAULT_VALUE':
+      return {
+        ...state,
+        defaultValue: action.payload,
+      }
     case 'REGISTER_USER_DATA':
       return {
         ...state,
@@ -52,6 +57,18 @@ const reducer = (state, action) => {
         ...state,
         playing: state.trends.find(item => item.id === Number(action.payload)) ||
           state.originals.find(item => item.id === Number(action.payload)) || {}
+      }
+    case 'FIND_DATA_DEFAULT':
+      let data = action.payload === 'meeting' ? state.meetings : state.process
+      return {
+        ...state,
+        defaultDataObject: data.find(dat => dat.id === action.id)
+      }
+    case 'DEFAULT_CLEAR':
+      return {
+        ...state,
+        defaultValue: '',
+        defaultDataObject: []
       }
     case 'FIND_DATA':
       // const newExps = [...state.meetings]

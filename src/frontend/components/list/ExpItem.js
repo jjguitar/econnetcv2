@@ -7,7 +7,7 @@ import { DeleteIcon } from './icons/DeleteIcon.js'
 import { EditIcon } from './icons/EditIcon.js'
 import AppContext from '../../context/AppContext'
 import { dateFn } from '../../utils/dateFn'
-import { deleteMeeting, deleteProcess } from '../../actions/index'
+import { deleteMeeting, deleteProcess, setDefaultValue, setModal } from '../../actions/index'
 import { connect } from 'react-redux';
 
 const ExpItem = (props) => {
@@ -16,7 +16,8 @@ const ExpItem = (props) => {
   const [openModal, setOpenModal] = React.useState(false);
 
   const onEditButton = (id) => {
-    // setDefaultValue(id)
+    props.setDefaultValue(id)
+    props.setModal()
     // props.setOpenModal(prevState => !prevState)
   }
 
@@ -96,7 +97,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   deleteMeeting,
-  deleteProcess
+  deleteProcess,
+  setModal,
+  setDefaultValue
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpItem);

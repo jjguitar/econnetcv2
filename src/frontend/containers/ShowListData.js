@@ -10,7 +10,7 @@ import { ExpsLoading } from '../components/list/ExpsLoading.js'
 import { EmptyExps } from '../components/list/EmptyExps.js'
 import ExpItem from '../components/list/ExpItem.js'
 import { connect } from 'react-redux';
-import { setModal, loadUsers } from '../actions/index'
+import { setModal, loadUsers, clearDefault } from '../actions/index'
 import '../styles/Experiences.scss';
 
 const ShowListData = (props) => {
@@ -18,6 +18,11 @@ const ShowListData = (props) => {
   useEffect(() => {
     props.loadUsers()
   },[]);
+
+  const onClickCreateButton = () => {
+    props.setModal()
+    props.clearDefault()
+  }
 
   console.log(props)
 	return (
@@ -56,7 +61,7 @@ const ShowListData = (props) => {
         </Modal>
       )}
       <CreateButton
-        setOpenModal={() => props.setModal()}
+        setOpenModal={() => onClickCreateButton()}
       />
 		</section>
 	);
@@ -71,7 +76,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   setModal,
-  loadUsers
+  loadUsers,
+  clearDefault
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowListData);

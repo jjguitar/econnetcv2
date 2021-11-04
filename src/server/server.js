@@ -75,7 +75,8 @@ const renderApp = async(req, res) => {
     searchedExps: [],
     process: [],
     searchedProcess: [],
-    users: []
+    users: [],
+    defaultDataObject: [],
   };
 
   // console.log(API_URL)

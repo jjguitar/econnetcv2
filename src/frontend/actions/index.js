@@ -30,6 +30,12 @@ export const findData = (payload) => ({
   payload,
 })
 
+export const findDataDefaultValues = (payload, id) => ({
+  type: 'FIND_DATA_DEFAULT',
+  payload,
+  id,
+})
+
 export const loadData = (payload) => {
   console.log('loadData');
   if(!payload) payload = 'meeting'
@@ -196,3 +202,13 @@ export const deleteUserProcess = (payload, url) => {
       .catch(error => dispatch(setError(error)))
   };
 };
+
+export const setDefaultValue = payload => ({
+  type: 'DEFAULT_VALUE',
+  payload,
+});
+
+export const clearDefault = payload => ({
+  type: 'DEFAULT_CLEAR',
+  payload,
+});

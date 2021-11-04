@@ -1,18 +1,29 @@
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
-import { setModal, findData, registerMeeting, setLoad } from '../actions/index'
+import { setModal, findDataDefaultValues, registerMeeting, setLoad, clearDefault } from '../actions/index'
 import '../styles/Form.css'
+import { dateFn } from '../utils/dateFn'
 import AppContext from '../context/AppContext';
 
-const Form = ({findData, defaultValue, setModal, registerMeeting, setLoad}) => {
+const Form = ({findDataDefaultValues, defaultValue, setModal, registerMeeting, setLoad, defaultDataObject, clearDefault}) => {
   // const { addExp, setOpenModal, defaultValue, findData, editExp } = useContext(AppContext)
   const [warningValue, setWarningValue] = React.useState(false)
 
   let defaultValues = {}
+  let defaultDate = ''
   if (defaultValue !== '') {
-    defaultValues = findData(defaultValue)
+    console.log('defaultValue')
+    console.log(defaultValue)
+
+    findDataDefaultValues('meeting', defaultValue)
+    defaultValues = defaultDataObject
+    console.log('defaultValues')
+    console.log(defaultValues)
+    defaultDate = defaultValues.date ? dateFn(defaultValues.date) : ''
+    console.log(defaultDate)
   }
   const onCancel = () => {
+    clearDefault()
     setModal()
   }
 
@@ -32,7 +43,7 @@ const Form = ({findData, defaultValue, setModal, registerMeeting, setLoad}) => {
       setLoad(true)
       registerMeeting(experience)
     } else {
-      editExp(experience, defaultValue)
+      // editExp(experience, defaultValue)
     }
     // setModal(false)
     setWarningValue(false)
@@ -54,9 +65,11 @@ const Form = ({findData, defaultValue, setModal, registerMeeting, setLoad}) => {
 
   const valuesDefault = ['Experiencia de DOMINGO',
   'Un mismo corazón', 'Romanos', 'Oración de madrugada', 'Aseo general', 'Taller RX']
-  const activeSelect = () => {
-    const found = valuesDefault.find(element => element === (defaultValue !== '' ? defaultValues[0].tittle : ''));
 
+  const activeSelect = () => {
+    const found = valuesDefault.find(element => element === (defaultValue !== '' ? defaultValues.name : ''));
+    console.log('found');
+    console.log(found);
     return found
   }
 
@@ -68,22 +81,23 @@ const Form = ({findData, defaultValue, setModal, registerMeeting, setLoad}) => {
       )}
       <div className="content-select">
         <select className="" name="tittle" required defaultValue={defaultValue !== '' ? activeSelect() : valuesDefault[0]}>
-          <option value={valuesDefault[0]}>Experiencia de DOMINGO</option>
+          {/* <option value={valuesDefault[0]}>Experiencia de DOMINGO</option>
           <option value={valuesDefault[1]}>Un mismo corazón</option>
           <option value={valuesDefault[2]}>Romanos</option>
           <option value={valuesDefault[3]}>Oración de madrugada</option>
           <option value={valuesDefault[4]}>Aseo general</option>
-          <option value={valuesDefault[5]}>Taller RX</option>
+          <option value={valuesDefault[5]}>Taller RX</option> */}
+          {defaultValue !== '' ? <option key='99AA' value={activeSelect()}>{activeSelect()}</option> : null}
+          {valuesDefault.map(value => <option key={value} value={value}>{value}</option>)}
         </select>
-        <i></i>
       </div>
 
       <label className="date" htmlFor="start">Start date:</label>
 
       <input className="date-form" name='date' type="date" id="start"
-        defaultValue={dateTodayFn()}
+        // defaultValue={dateTodayFn()}
         // defaultValue={'2021-11-02'}
-        // defaultValue={defaultValue !== '' ? defaultValues[0].date : dateTodayFn()}
+        defaultValue={defaultValue !== '' ? defaultDate : dateTodayFn()}
         //2021-11-2
         min="2018-01-01"
         required
@@ -93,7 +107,7 @@ const Form = ({findData, defaultValue, setModal, registerMeeting, setLoad}) => {
         autoFocus={defaultValue !== '' ? false : true}
         placeholder='Escribe una nueva tarea'
         required
-        defaultValue={defaultValue !== '' ? defaultValues[0].description : ''}
+        defaultValue={defaultValue !== '' ? defaultValues.description : ''}
       />
 
       <p className="volunteer">¿Requiere voluntarios?:</p>
@@ -103,14 +117,14 @@ const Form = ({findData, defaultValue, setModal, registerMeeting, setLoad}) => {
           name="isVolunteerRequired"
           value='1'
           required
-          defaultChecked={defaultValue !== '' ? (defaultValues[0].isVolunteerRequired === '1') : true}
+          defaultChecked={defaultValue !== '' ? defaultValues.reqVolunteer : true}
         />SI
         <input
           type="radio"
           name="isVolunteerRequired"
           value='2'
           required
-          defaultChecked={defaultValue !== '' ? !(defaultValues[0].isVolunteerRequired === '1') : false}
+          defaultChecked={defaultValue !== '' ? !(defaultValues.reqVolunteer) : false}
         />NO
       </label>
 
@@ -118,7 +132,7 @@ const Form = ({findData, defaultValue, setModal, registerMeeting, setLoad}) => {
       <div className="ExpForm-buttonContainer">
         <button
           type="button"
-          onClick={onCancel}
+          onClick={() => onCancel()}
           className="ExpForm-button ExpForm-button-cancel"
         >
           Cancelar
@@ -136,15 +150,17 @@ const Form = ({findData, defaultValue, setModal, registerMeeting, setLoad}) => {
 
 const mapStateToProps = state => {
   return {
-    defaultValue: state.defaultValue
+    defaultValue: state.defaultValue,
+    defaultDataObject: state.defaultDataObject,
   };
 };
 
 const mapDispatchToProps = {
   setModal,
-  findData,
+  findDataDefaultValues,
   registerMeeting,
-  setLoad
+  setLoad,
+  clearDefault
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
