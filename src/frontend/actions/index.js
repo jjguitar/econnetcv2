@@ -117,6 +117,7 @@ export const registerProcess = (payload) => {
       .catch(error => dispatch(setError(error)))
   };
 };
+
 export const deleteMeeting = (payload) => {
   console.log('payload');
   console.log(payload);
@@ -152,6 +153,45 @@ export const deleteProcess = (payload) => {
       })
       .then(() => {
         window.location.href = '#/processes'
+      })
+      .catch(error => dispatch(setError(error)))
+  };
+};
+
+export const registerUserToProcess = (payload, url) => {
+  console.log('registerUserToProcess');
+  console.log(payload);
+  console.log('url');
+  console.log(url);
+  return (dispatch) => {
+    axios.post('/process/add-process', payload)
+      // .then(({ data }) => dispatch(registerRequest()))
+      // .then(() => dispatch(loadData()))
+      .then(() => {
+        dispatch(loadData('process'))
+      })
+      .then(() => {
+        window.location.href = `#/process/${url}`
+      })
+      .catch(error => dispatch(setError(error)))
+  };
+};
+
+export const deleteUserProcess = (payload, url) => {
+  console.log('payload');
+  console.log(payload);
+  return (dispatch) => {
+    axios.post('/process/delete-user-process', payload)
+      // .then(({ data }) => dispatch(registerRequest()))
+      // .then(() => dispatch(loadData()))
+      // .then(() => {
+      //   dispatch(setModal())
+      // })
+      .then(() => {
+        dispatch(loadData('process'))
+      })
+      .then(() => {
+        window.location.href = `#/process/${url}`
       })
       .catch(error => dispatch(setError(error)))
   };

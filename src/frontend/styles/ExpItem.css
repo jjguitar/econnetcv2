@@ -59,3 +59,12 @@
 .Icon-delete:hover {
   color: red;
 }
+
+.ExpItem.User-list {
+  filter: none;
+}
+
+.User-list:last-child {
+  margin-bottom: 70px;
+}
+

@@ -195,6 +195,30 @@ app.post("/process", async function (req, res, next) {
   console.log(res.body)
 });
 
+app.post("/process/add-process", async function (req, res, next) {
+  const { body } = req
+  console.log(body)
+
+  try {
+    const meetingData = await axios({
+      url: `${API_URL}/api/v1/process/add-process`,
+      method: "post",
+      data: {
+        'id_process': body.id_process,
+        'id_user': body.id_user,
+      }
+    });
+    res.status(201).json({
+      // console.log(req.body)
+      // email: req.body.email,
+      // id: meetingData.data.id
+    });
+  } catch (error) {
+    next(error);
+  }
+  console.log(res.body)
+});
+
 app.post("/deleteProcess", async function (req, res, next) {
   const { body } = req
   // console.log('delete')
@@ -203,6 +227,27 @@ app.post("/deleteProcess", async function (req, res, next) {
   try {
     const meetingData = await axios({
       url: `${API_URL}/api/v1/process/${body.id}`,
+      method: "delete"
+    });
+    res.status(201).json({
+      // console.log(req.body)
+      // email: req.body.email,
+      // id: meetingData.data.id
+    });
+  } catch (error) {
+    next(error);
+  }
+  console.log(res.body)
+});
+
+app.post("/process/delete-user-process", async function (req, res, next) {
+  const { body } = req
+  console.log('delete')
+  console.log(body)
+
+  try {
+    const meetingData = await axios({
+      url: `${API_URL}/api/v1/process/add-process?id_user=${body.id_user}&id_process=${body.id_process}`,
       method: "delete"
     });
     res.status(201).json({
